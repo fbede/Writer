@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'home/pages/home_page.dart';
 
-import 'home/home_page.dart';
-import 'home/home_page.dart';
-
-/*
- * THINGS TO DO
- * TODO: Add SplashScreen
- * TODO: Add OnboardingScreen
- * TODO: Add LoginScreen
- * TODO: Add TutorialScreen
- * TODO: Add HomeScreen
- */
+//
+// TODO 1: Add SplashScreen
+// TODO: Maybe Add LanguageScreen
+// TODO 2: Add OnboardingScreen
+// TODO 3: Add LoginScreen
+// TODO 4: Add TutorialScreen
+// TODO 5: Add HomeScreen
+//
 
 void main() {
   runApp(const MyApp());

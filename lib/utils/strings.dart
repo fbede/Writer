@@ -1,2 +1,2 @@
-const stringAppName = 'Writer🖊';
+const stringAppName = 'Writer';
 const stringLibrary = 'Library';
