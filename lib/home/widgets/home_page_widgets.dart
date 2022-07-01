@@ -77,55 +77,6 @@ Widget homePageBody3 = const Center(
 );
 
 // ! Error not working as supposed to
-Widget homePageBody = LayoutBuilder(builder: ((context, constraints) {
-  return CustomScrollView(
-    slivers: [
-      // TODO: Modify to look similar to mum's phone
-      SliverAppBar(
-          pinned: true,
-          expandedHeight: MediaQuery.of(context).size.width * 0.7,
-          backgroundColor: Colors.blue,
-          flexibleSpace: Container(
-            alignment: Alignment.centerLeft,
-            margin: const EdgeInsetsDirectional.only(
-                start: 40, end: 40, top: 5, bottom: 5),
-            child: const FittedBox(
-              fit: BoxFit.contain,
-              child: SizedBox(
-                child: Text(
-                  stringLibrary,
-                  style: TextStyle(color: Colors.white, fontSize: 500),
-                ),
-              ),
-            ),
-          )),
-      SliverToBoxAdapter(
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          color: Colors.green,
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Container(
-          height: 200,
-          margin: const EdgeInsets.all(10),
-          color: Colors.green,
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Container(
-          height: 200,
-          margin: const EdgeInsets.all(10),
-          color: Colors.green,
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Container(
-          height: 200,
-          margin: const EdgeInsets.all(10),
-          color: Colors.green,
-        ),
-      )
-    ],
-  );
-}));
+//Widget homePageBody = LayoutBuilder(builder: ((context, constraints) {
+ // return 
+//}));
