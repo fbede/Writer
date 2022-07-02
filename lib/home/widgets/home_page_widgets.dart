@@ -52,6 +52,7 @@ PreferredSizeWidget homeAppBar = AppBar(
 
 //SpeedDial or FloatingActionButton
 Widget createButton = SpeedDial(
+  animationDuration: const Duration(milliseconds: 250),
   animatedIcon: AnimatedIcons.menu_close,
   overlayOpacity: 0,
   spacing: 12,
