@@ -28,11 +28,14 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
 
 dev_dependencies:
+  animate_icons: ^2.0.0
+  animated_icon_button: ^1.0.2
   bloc: ^8.0.3
   bloc_test: ^9.0.3
   flutter_lints: ^2.0.0
