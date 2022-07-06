@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import '../../animations/cubits/custom_animation_cubit.dart';
 import '../../utils/strings.dart';
+import '../cubits/home_page_cubit.dart';
 import '../pages/home_page.dart';
 
 class HomePageNavigationBar extends StatelessWidget {
@@ -50,13 +50,13 @@ class HomePageFloatingActionButton extends StatelessWidget {
             child: const Icon(Icons.book),
             label: stringCreateNewBook,
             onTap: () {
-              // TODO: Add Implementation Later
+              context.read<HomePageCubit>().createNewBook();
             }),
         SpeedDialChild(
             child: const Icon(Icons.folder),
             label: stringCreateNewSeries,
             onTap: () {
-              // TODO: Add Implementation Later
+              context.read<HomePageCubit>().createNewSeries();
             })
       ],
     );
@@ -74,32 +74,32 @@ class HomePageBody extends StatelessWidget {
     return NotificationListener(
         onNotification: (ScrollMetricsNotification notification) {
           context
-              .read<CustomAnimationCubit>()
-              .handleNotification(context, id, notification);
+              .read<HomePageCubit>()
+              .handleNotification(context, notification);
           return true;
         },
         child: CustomScrollView(
           slivers: [
             //First AppBar (Hidden)
             SliverAppBar(
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             ),
 
             //Title Page
             SliverToBoxAdapter(
               child: Container(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 height: MediaQuery.of(context).size.width * 0.6,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BlocBuilder<CustomAnimationCubit, CustomAnimationState>(
-                      buildWhen: (previous, current) {
-                        return current.id == id;
-                      },
+                    BlocBuilder<HomePageCubit, HomePageState>(
+                      // buildWhen: (previous, current) {
+                      //  return previous.opacity != current.opacity;
+                      //},
                       builder: (context, state) {
                         return Opacity(
-                          opacity: 1 - state.value,
+                          opacity: 1 - state.opacity,
                           child: Text(
                             stringLibraryTitle,
                             style: Theme.of(context).textTheme.displayMedium,
@@ -108,28 +108,28 @@ class HomePageBody extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 14),
-                    BlocBuilder<CustomAnimationCubit, CustomAnimationState>(
-                      buildWhen: (previous, current) {
-                        return current.id == id;
-                      },
+                    BlocBuilder<HomePageCubit, HomePageState>(
+                      //buildWhen: (previous, current) {
+                      //  return previous.opacity != current.opacity;
+                      //},
                       builder: (context, state) {
                         return Opacity(
-                            opacity: 1 - state.value,
+                            opacity: 1 - state.opacity,
                             child: Text(
-                              'Books 3',
+                              'Books ${state.books}',
                               style: Theme.of(context).textTheme.titleMedium,
                             ));
                       },
                     ),
                     const SizedBox(height: 5),
-                    BlocBuilder<CustomAnimationCubit, CustomAnimationState>(
-                      buildWhen: (previous, current) {
-                        return current.id == id;
-                      },
+                    BlocBuilder<HomePageCubit, HomePageState>(
+                      // buildWhen: (previous, current) {
+                      //  return previous.opacity != current.opacity;
+                      //},
                       builder: (context, state) {
                         return Opacity(
-                          opacity: 1.0 - state.value,
-                          child: Text('Series 4',
+                          opacity: 1.0 - state.opacity,
+                          child: Text('Series ${state.series}',
                               style: Theme.of(context).textTheme.titleMedium),
                         );
                       },
@@ -141,15 +141,15 @@ class HomePageBody extends StatelessWidget {
 
             //Actual AppBar
             SliverAppBar(
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               pinned: true,
-              title: BlocBuilder<CustomAnimationCubit, CustomAnimationState>(
+              title: BlocBuilder<HomePageCubit, HomePageState>(
                 buildWhen: (previous, current) {
-                  return current.id == id;
+                  return previous.opacity != current.opacity;
                 },
                 builder: (context, state) {
                   return Opacity(
-                      opacity: state.value,
+                      opacity: state.opacity,
                       child: Text(stringLibraryTitle,
                           style: Theme.of(context).textTheme.titleLarge));
                 },

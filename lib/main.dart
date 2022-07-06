@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:writer/home/cubits/custom_animation_cubit.dart';
+import 'home/cubits/home_page_cubit.dart';
 import 'home/pages/home_page.dart';
 import 'utils/color_schemes.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CustomAnimationCubit(),
+      create: (context) => HomePageCubit(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
