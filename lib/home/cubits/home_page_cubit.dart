@@ -34,4 +34,11 @@ class HomePageCubit extends Cubit<HomePageState> {
     s++;
     emit(state.copyWith(series: s));
   }
+
+  //creates new series
+  void deletesASeries() {
+    int s = state.series;
+    s--;
+    emit(state.copyWith(series: s));
+  }
 }

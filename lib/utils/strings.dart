@@ -6,3 +6,4 @@ const stringCreateNewBook = 'Create New Book';
 const stringCreateNewSeries = 'Create New Series';
 const stringBooksLabel = 'Books: ';
 const stringSeriesLabel = 'Series: ';
+const stringDelete = 'Delete';

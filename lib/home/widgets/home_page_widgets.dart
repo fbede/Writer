@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../../utils/strings.dart';
@@ -38,6 +39,28 @@ class HomePageFloatingActionButton extends StatelessWidget {
   }
 }
 
+// This is how the grid view looks on all layouts
+class ProjectGridView extends StatelessWidget {
+  const ProjectGridView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomePageCubit, HomePageState>(
+        builder: ((context, state) {
+      return SliverGrid(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            childAspectRatio: 1 / 1.7, maxCrossAxisExtent: 150),
+        delegate: SliverChildBuilderDelegate(childCount: state.totalProjects,
+            (context, index) {
+          return const ProjectView();
+        }),
+      );
+    }));
+  }
+}
+
 //This determines how each project, book or series looks
 class ProjectView extends StatelessWidget {
   const ProjectView({
@@ -49,8 +72,7 @@ class ProjectView extends StatelessWidget {
     return InkWell(
       // TODO Implement open later
       onTap: () {},
-      onLongPress: () {},
-      onHover: (hover) {},
+      onLongPress: () {}, //makes selectable true
       enableFeedback: true,
       child: Padding(
         padding: const EdgeInsetsDirectional.only(start: 8.0, end: 8.0),
@@ -62,7 +84,8 @@ class ProjectView extends StatelessWidget {
                 Positioned.fill(
                     child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(color: Colors.blueGrey),
+                  child: Container(
+                      color: Theme.of(context).scaffoldBackgroundColor),
                 )),
                 Positioned.fill(
                   child: FittedBox(
@@ -89,34 +112,27 @@ class ProjectView extends StatelessWidget {
                 ),
 
                 //TODO change to menu button
-                IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+                PopupMenuButton(
+                    elevation: 2,
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    icon: const Icon(Icons.more_vert),
+                    itemBuilder: (BuildContext context) {
+                      //These are the menu items for right hand click
+
+                      final List<PopupMenuItem> homePageMenuItems = [
+                        // TODO Add more functionality like Covert to series or convert to book etc
+                        PopupMenuItem(
+                          onTap: context.read<HomePageCubit>().deletesASeries,
+                          child: const Text(stringDelete),
+                        )
+                      ];
+                      return homePageMenuItems;
+                    })
               ],
             )
           ],
         ),
       ),
     );
-  }
-}
-
-// This is how the grid view looks on all layouts
-class ProjectGridView extends StatelessWidget {
-  const ProjectGridView({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<HomePageCubit, HomePageState>(
-        builder: ((context, state) {
-      return SliverGrid(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 1 / 1.7, maxCrossAxisExtent: 150),
-        delegate: SliverChildBuilderDelegate(childCount: state.totalProjects,
-            (context, index) {
-          return const ProjectView();
-        }),
-      );
-    }));
   }
 }
