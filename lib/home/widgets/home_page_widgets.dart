@@ -51,7 +51,7 @@ class ProjectGridView extends StatelessWidget {
         builder: ((context, state) {
       return SliverGrid(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 1 / 1.7, maxCrossAxisExtent: 150),
+            childAspectRatio: 1 / 1.8, maxCrossAxisExtent: 150),
         delegate: SliverChildBuilderDelegate(childCount: state.totalProjects,
             (context, index) {
           return const ProjectView();
@@ -69,68 +69,70 @@ class ProjectView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      // TODO Implement open later
-      onTap: () {},
-      onLongPress: () {}, //makes selectable true
-      enableFeedback: true,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.only(start: 8.0, end: 8.0),
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 1 / 1.5,
-              child: Stack(children: [
-                Positioned.fill(
-                    child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      color: Theme.of(context).scaffoldBackgroundColor),
-                )),
-                Positioned.fill(
-                  child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Icon(
-                        Icons.book,
-                        color: Theme.of(context).colorScheme.primary,
-                      )),
-                ),
-              ]),
-            ),
-            Row(
-              //TODO Confirm Text position in tabview
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      'Title',
-                      style: Theme.of(context).textTheme.titleMedium,
+    return Padding(
+      padding: const EdgeInsetsDirectional.all(8.0),
+      child: Card(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        elevation: 2,
+        child: InkWell(
+          onTap: () {},
+          onLongPress: () {},
+          enableFeedback: true,
+          child: Column(
+            children: [
+              AspectRatio(
+                aspectRatio: 1 / 1.5,
+                child: Stack(children: [
+                  Positioned.fill(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(),
+                  )),
+                  Positioned.fill(
+                    child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Icon(
+                          Icons.book,
+                          color: Theme.of(context).colorScheme.primary,
+                        )),
+                  ),
+                ]),
+              ),
+              Row(
+                //TODO Confirm Text position in tabview
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        'Title',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ),
                   ),
-                ),
 
-                //TODO change to menu button
-                PopupMenuButton(
-                    elevation: 2,
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    icon: const Icon(Icons.more_vert),
-                    itemBuilder: (BuildContext context) {
-                      //These are the menu items for right hand click
+                  //TODO change to menu button
+                  PopupMenuButton(
+                      elevation: 2,
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      icon: const Icon(Icons.more_vert),
+                      itemBuilder: (BuildContext context) {
+                        //These are the menu items for right hand click
 
-                      final List<PopupMenuItem> homePageMenuItems = [
-                        // TODO Add more functionality like Covert to series or convert to book etc
-                        PopupMenuItem(
-                          onTap: context.read<HomePageCubit>().deletesASeries,
-                          child: const Text(stringDelete),
-                        )
-                      ];
-                      return homePageMenuItems;
-                    })
-              ],
-            )
-          ],
+                        final List<PopupMenuItem> homePageMenuItems = [
+                          // TODO Add more functionality like Covert to series or convert to book etc
+                          PopupMenuItem(
+                            onTap: context.read<HomePageCubit>().deletesASeries,
+                            child: const Text(stringDelete),
+                          )
+                        ];
+                        return homePageMenuItems;
+                      })
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
