@@ -1,0 +1,107 @@
+import 'package:universal_io/io.dart';
+import 'package:easy_splash_screen/easy_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_sign_in_dartio/google_sign_in_dartio.dart';
+import 'package:money_tracker/navigation/nav_redirect_rules.dart';
+import 'package:money_tracker/navigation/main_routes.dart';
+import 'package:money_tracker/utils/constants.dart';
+import 'package:window_size/window_size.dart';
+import 'firebase_options.dart';
+import 'utils/color_schemes.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+
+
+class SplashPage extends StatelessWidget {
+  const SplashPage({Key? key}) : super(key: key);
+
+  
+
+  // Handles all async operations then starts the actual app
+  Future<Widget> futureCall() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    
+
+      //Initialize firebase
+      if ((defaultTargetPlatform == TargetPlatform.windows) ||
+          (defaultTargetPlatform == TargetPlatform.linux)) {
+        await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+      } else {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      }
+
+      //sets google sign in for desktop
+      if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+        await GoogleSignInDart.register(
+            clientId:
+                '377376525654-gjolf7sehfe09233brlodk5ebqlt4bf7.apps.googleusercontent.com');
+      }
+    }
+
+    
+    return Future.delayed(const Duration(seconds: 6), (() {
+      return Builder(
+          builder: ((context) => GestureDetector(
+              onTap: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                }
+              },
+              //Used to automatically hide keyboard when filling forms all around the app
+              child: TooltipVisibility(
+                  visible: false,
+                  //This is the actual app
+                  child: MaterialApp.router(
+                    routeInformationParser: router.routeInformationParser,
+                    routeInformationProvider: router.routeInformationProvider,
+                    routerDelegate: router.routerDelegate,
+                    //repeated the theme here because descendant widgets use this
+                    title: appName,
+                    themeMode: ThemeMode.system,
+                    theme: ThemeData(
+                        colorScheme: lightColorScheme,
+                        visualDensity: VisualDensity.adaptivePlatformDensity),
+                    darkTheme: ThemeData(
+                        colorScheme: darkColorScheme,
+                        visualDensity: VisualDensity.adaptivePlatformDensity),
+                  )))));
+    }));
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LibraryCubit>(
+          create: (context) => LibraryCubit(),
+        ),
+        BlocProvider<HomePageCubit>(
+          create: (context) =>
+              HomePageCubit(libraryCubit: context.read<LibraryCubit>()),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+        home: HomePage(),
+      ),
+    );
+  }
+}
+

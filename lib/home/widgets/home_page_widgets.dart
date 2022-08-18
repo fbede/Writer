@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:writer/home/cubits/library_cubit.dart';
 import '../../utils/strings.dart';
 import '../cubits/home_page_cubit.dart';
 
-// This file contains widgets that are common to both tablet and mobile views
+// This file contains widgets that are common to both tablet and mobile home views
 
 //SpeedDial or FloatingActionButton
 class HomePageFloatingActionButton extends StatelessWidget {
@@ -75,8 +76,12 @@ class ProjectView extends StatelessWidget {
         color: Theme.of(context).colorScheme.primaryContainer,
         elevation: 2,
         child: InkWell(
+          //TODO: Implement later
           onTap: () {},
-          onLongPress: () {},
+          //TODO: Add full functionality later
+          onLongPress: () {
+            context.read<HomePageCubit>().setSelectionMode();
+          },
           enableFeedback: true,
           child: Column(
             children: [

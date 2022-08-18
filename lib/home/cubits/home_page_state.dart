@@ -1,10 +1,13 @@
 part of 'home_page_cubit.dart';
 
+final ilibState = LibraryStateInitial();
+
 class HomePageState extends Equatable {
   const HomePageState(
       {required this.opacity,
       required this.books,
       required this.series,
+      required this.libraryState,
       this.openBottomSheet = false})
       : totalProjects = books + series;
 
@@ -13,13 +16,16 @@ class HomePageState extends Equatable {
   final int series;
   final int totalProjects;
   final bool openBottomSheet;
+  final LibraryState libraryState;
 
-  HomePageState copyWith({opacity, books, series, openBottomSheet}) {
+  HomePageState copyWith(
+      {opacity, books, series, openBottomSheet, libraryState}) {
     return HomePageState(
         opacity: opacity ?? this.opacity,
         books: books ?? this.books,
         series: series ?? this.series,
-        openBottomSheet: openBottomSheet ?? this.openBottomSheet);
+        openBottomSheet: openBottomSheet ?? this.openBottomSheet,
+        libraryState: libraryState ?? this.libraryState);
   }
 
   @override
@@ -28,5 +34,6 @@ class HomePageState extends Equatable {
   }
 
   @override
-  List<Object> get props => [opacity, books, series, openBottomSheet];
+  List<Object> get props =>
+      [opacity, books, series, openBottomSheet, libraryState];
 }

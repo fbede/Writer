@@ -104,9 +104,15 @@ class MobileHomePage extends StatelessWidget {
           floatingActionButton: const HomePageFloatingActionButton(),
 
           //bottom Nav Bar
-          bottomNavigationBar: LayoutBuilder(
-            builder: ((context, constraints) =>
-                const _HomePageBottomNavigationBar()),
+          bottomNavigationBar: BlocBuilder<HomePageCubit, HomePageState>(
+            builder: (context, state) {
+              if (state.openBottomSheet) {
+                return BottomAppBar(
+                  child: IconButton(onPressed: () {}, icon: Icon(Icons.abc)),
+                );
+              }
+              return const _HomePageBottomNavigationBar();
+            },
           )),
     );
   }

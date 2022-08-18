@@ -1,15 +1,31 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:writer/home/cubits/library_cubit.dart';
 
 part 'home_page_state.dart';
 
-int books = 0;
-
 class HomePageCubit extends Cubit<HomePageState> {
-  HomePageCubit() : super(const HomePageState(opacity: 0, books: 0, series: 0));
+  final LibraryCubit libraryCubit;
+  StreamSubscription? libraryStreamSubscription;
+  // LibraryStateInitial libraryStateInitial; //= LibraryStateInitial();
 
-  // * Uses the scroll notifications to determine appbar text opacity
+  HomePageCubit({required this.libraryCubit})
+      : super(HomePageState(
+            opacity: 0,
+            books: 0,
+            series: 0,
+            libraryState: LibraryStateInitial())) {
+    libraryStreamSubscription = libraryCubit.stream.listen((libraryState) {
+      emit(state.copyWith(libraryState: libraryState));
+    });
+  }
+
+  //listens to library cubit
+
+  //Uses the scroll notifications to determine appbar text opacity
   void handleNotification(BuildContext context, scrollMetricsNotification) {
     var percentScrolled = scrollMetricsNotification.metrics.extentBefore /
         (MediaQuery.of(context).size.width * 0.7);
@@ -23,9 +39,7 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   //creates new book
   void createNewBook() {
-    int b = state.books;
-    b++;
-    emit(state.copyWith(books: b));
+    //libraryCubit.createNewBook();
   }
 
   //creates new series
@@ -41,4 +55,6 @@ class HomePageCubit extends Cubit<HomePageState> {
     s--;
     emit(state.copyWith(series: s));
   }
+
+  void setSelectionMode() => emit(state.copyWith(openBottomSheet: true));
 }

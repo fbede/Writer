@@ -1,16 +1,16 @@
-abstract class _AppProject {
+abstract class AppProjects {
   String name;
   DateTime dateCreated;
   DateTime? lastmodified;
 
-  _AppProject({required this.name, required this.dateCreated});
+  AppProjects({required this.name, required this.dateCreated});
 }
 
-class Books extends _AppProject {
+class Books extends AppProjects {
   Books({required super.name, required super.dateCreated});
 }
 
-class Series extends _AppProject {
+class Series extends AppProjects {
   List<Books> books = [];
   Series({required super.name, required super.dateCreated});
 }

@@ -1,4 +1,4 @@
-const stringAppName = 'Writer';
+const stringAppName = 'Wryter';
 const stringLibraryTitle = 'Library';
 const stringStore = 'Store';
 const stringProfile = 'Profile';
