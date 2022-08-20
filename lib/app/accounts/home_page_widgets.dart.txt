@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:writer/home/cubits/library_cubit.dart';
+import 'package:writer/app/cubits/library_cubit.dart';
 import '../../utils/strings.dart';
 import '../cubits/home_page_cubit.dart';
 

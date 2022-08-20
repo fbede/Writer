@@ -1,9 +1,10 @@
-abstract class AppProjects {
+class AppProjects {
   String name;
   DateTime dateCreated;
   DateTime? lastmodified;
 
-  AppProjects({required this.name, required this.dateCreated});
+  AppProjects(
+      {required this.name, required this.dateCreated, this.lastmodified});
 }
 
 class Books extends AppProjects {

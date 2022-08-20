@@ -3,18 +3,20 @@ import 'dart:io';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_size/window_size.dart';
-import 'package:writer/router/app_router.dart';
+import 'package:writer/app/library/cubit/library_cubit.dart';
 import 'package:writer/utils/strings.dart';
+import 'router/main_routes.dart';
 import 'utils/color_schemes.dart';
 
 // TODO 1: Add SplashScreen
-// TODO: Maybe Add LanguageScreen
-// TODO 2: Add OnboardingScreen
-// TODO 3: Add LoginScreen
-// TODO 4: Add TutorialScreen
-// TODO 5: Add HomeScreen
+// TODO 2: Maybe Add LanguageScreen
+// TODO 3: Add OnboardingScreen
+// TODO 4: Add LoginScreen
+// TODO 5: Add TutorialScreen
+// TODO 6: Add HomeScreen
 
 void main() {
   runApp(const MyApp());
@@ -49,7 +51,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: EasySplashScreen(
-        logo: Image.asset('assets/flutter_joke.png'),
+        logo: Image.asset(''),
         title: Text(
           stringAppName,
           style: Theme.of(context).textTheme.titleLarge,
@@ -68,6 +70,11 @@ class SplashPage extends StatelessWidget {
     //set desktop window sizing
     if (!kIsWeb) {
       if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+        //window size package is a necessary evil
+        //it is not available on pub.dev but
+        //it prevents the window on desktop from becoming too small
+        //this would prevent users from making the window so small
+        //and prevent unbounded widget error in flutter
         setWindowTitle(stringAppName);
         setWindowMinSize(const Size(300, 300));
         setWindowMaxSize(Size.infinite);
@@ -76,25 +83,36 @@ class SplashPage extends StatelessWidget {
 
     //initialize router
     final GoRouter router = GoRouter(
-      routes: mainAppRoutes,
-      //based on firebase auth
-      /* redirect: (state) => NavRules.userLoggedInRule(state) */
+      routes: getRoute(),
     );
 
     //starts actual app
+    //displays splashscreen for 4 seconds
     return Future.delayed(const Duration(seconds: 4), ((() {
       //add necessary comments here
       return Builder(
+          //This makes keyboards on touchscreen devices to automatically close
           builder: ((context) => GestureDetector(
-                onTap: () {},
-                child: TooltipVisibility(
-                  visible: false,
+              onTap: () {},
+              child: TooltipVisibility(
+                visible: false,
+                child: MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => LibraryCubit(),
+                    )
+                  ],
                   child: MaterialApp.router(
+                      title: 'Flutter Demo',
+                      theme: ThemeData(
+                          useMaterial3: true, colorScheme: nLightColorScheme),
+                      darkTheme: ThemeData(
+                          useMaterial3: true, colorScheme: nDarkColorScheme),
                       routeInformationProvider: router.routeInformationProvider,
                       routeInformationParser: router.routeInformationParser,
                       routerDelegate: router.routerDelegate),
                 ),
-              )));
+              ))));
     })));
   }
 }
