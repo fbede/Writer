@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:writer/app/library/cubit/library_cubit.dart';
+import 'package:writer/ui/library/cubit/library_cubit.dart';
 import '../../utils/strings.dart';
 
 //Provides the title block
-class LibraryTitle extends StatelessWidget {
+class LibraryTitleBlock extends StatelessWidget {
   final double opacity;
-  const LibraryTitle({Key? key, required this.opacity}) : super(key: key);
+  const LibraryTitleBlock({Key? key, required this.opacity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

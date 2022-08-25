@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:writer/app/library/cubit/library_cubit.dart';
-import 'package:writer/app/library/library_widgets.dart';
+import 'package:writer/ui/library/cubit/library_cubit.dart';
+import 'package:writer/ui/library/library_widgets.dart';
 
 class MobileLibraryPage extends StatefulWidget {
   const MobileLibraryPage({Key? key}) : super(key: key);
@@ -32,11 +32,11 @@ class _MobileLibraryPageState extends State<MobileLibraryPage> {
                   ),
 
                   //TitleWidget
-                  LibraryTitle(opacity: opacity),
+                  LibraryTitleBlock(opacity: opacity),
                   LibraryAppBar(opacity: opacity),
 
                   SliverToBoxAdapter(
-                    child: SizedBox(height: 2000),
+                    child: SizedBox(height: 5000),
                   )
                 ],
               ),

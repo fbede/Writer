@@ -1,8 +1,11 @@
 //main paths
 const String homePath = '/';
-const String libraryPath = '/library';
-const String notesPath = '/notes';
-const String profilePath = '/profile';
+const String libraryPath = 'library';
+const String notesPath = 'notes';
+const String settingsPath = 'settings';
+
+//settings paths
+const String selectThemePath = 'selecttheme';
 
 //unused paths
 const String splashPath = '/splash';
@@ -12,4 +15,3 @@ const String signUpPath = '/signUp';
 const String passwordResetPath = '/resetPassword';
 
 const String reportsPath = '/reports';
-const String settingsPath = '/settings';

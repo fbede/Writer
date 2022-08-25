@@ -6,7 +6,7 @@ Widget buildResponsivePage(
     // ? Maybe Finetune Responsivness Later
     var aspectRatio = (MediaQuery.of(context).size.width /
         (MediaQuery.of(context).size.height));
-    if ((constraints.maxWidth > 400) && (aspectRatio >= 0.6)) {
+    if ((MediaQuery.of(context).size.width > 400) && (aspectRatio >= 0.8)) {
       return desktopLayout;
     } else {
       return mobileLayout;
