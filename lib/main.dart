@@ -60,11 +60,14 @@ class SplashPage extends StatelessWidget {
         logo: Image.asset(''),
         title: Text(
           stringAppName,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context)
+              .textTheme
+              .displayLarge
+              ?.copyWith(color: getAppBarForgroundColor(context)),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: getAppBarBackgroundColor(context),
         showLoader: true,
-        loadingText: const Text("Loading..."),
+        loadingText: const Text(''),
         futureNavigator: futureCall(),
       ),
     );
