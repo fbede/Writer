@@ -9,7 +9,7 @@ import 'package:writer/utils/shapes.dart';
 import 'package:writer/utils/strings.dart';
 
 import '../../../router/main_routes.dart';
-import 'app_settings_widgets.dart';
+import '../widgets/app_settings_widgets.dart';
 
 class MobileAppSettingsPage extends StatelessWidget {
   const MobileAppSettingsPage({Key? key}) : super(key: key);
@@ -31,62 +31,35 @@ class MobileAppSettingsPage extends StatelessWidget {
           SliverAppBarFactory(
             opacity: opacity,
           ),
+
           //TitleWidget
           buildTitleBlock(context, opacity),
+
+          //TrueAppBar
           SliverAppBarFactory(
             opacity: opacity,
             title: stringSettings,
             isPinned: true,
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    //Theme ListTile
-                    ListTile(
-                      leading: getThemeIcon(context: context),
-                      title: const Text(stringTheme),
-                      subtitle: getThemeSubtitle(context: context),
-                      onTap: () => showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: bottomSheetShape,
-                          builder: (context) => SelectThemeModeWidget(
-                                context: context,
-                              )),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
+
+          //builds the body that shows the list of available settings
+          buildSettingsBody(context),
         ],
       ),
     ));
   }
 
-  Text getThemeSubtitle({required BuildContext context}) {
-    switch (context.read<SettingsCubit>().state.themeMode) {
-      case ThemeMode.dark:
-        return const Text(stringThemeModeDark);
-      case ThemeMode.light:
-        return const Text(stringThemeModeLight);
-      case ThemeMode.system:
-        return const Text(stringThemeModeSystem);
-    }
-  }
-
-  Icon getThemeIcon({required BuildContext context}) {
-    switch (context.read<SettingsCubit>().state.themeMode) {
-      case ThemeMode.dark:
-        return const Icon(Icons.dark_mode);
-      case ThemeMode.light:
-        return const Icon(Icons.light_mode);
-      case ThemeMode.system:
-        return const Icon(Icons.computer);
-    }
+//builds the settings body
+  SliverToBoxAdapter buildSettingsBody(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+            child: SettingsBody(
+          scafoldBuildContext: context,
+        )),
+      ),
+    );
   }
 
 //builds the title block

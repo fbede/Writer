@@ -6,7 +6,7 @@ class LibraryState extends Equatable {
 
   final List<AppProjects> projectList;
 
-  get projectNum => projectList.length;
+  int get projectNum => projectList.length;
 
   @override
   List<Object> get props => [projectList];

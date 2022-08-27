@@ -3,6 +3,7 @@
 const stringAppName = 'StoryFi';
 const stringDelete = 'Delete';
 const stringSave = 'Save';
+const stringAppVersion = 'Version: 0.1.0';
 
 //Library Strings
 const stringLibrary = 'Library';
@@ -18,6 +19,8 @@ const stringThemeModeLight = 'Light Mode';
 const stringThemeModeDark = 'Dark Mode';
 const stringThemeModeSystem = 'System Mode';
 const stringSelectThemeMode = 'Select Theme Mode';
+const stringAboutApp = 'About App';
+const stringViewLicenses = 'View Licenses';
 
 //Other Strings
 const stringStore = 'Store';

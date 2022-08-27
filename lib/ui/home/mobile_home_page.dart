@@ -5,9 +5,6 @@ import 'package:writer/router/router_paths.dart';
 import '../../router/main_routes.dart';
 import '../../utils/strings.dart';
 
-import '../app_settings/pages/app_settings_page.dart';
-import '../library/mobile_library_page.dart';
-
 class MobileHomePage extends StatefulWidget {
   const MobileHomePage({Key? key, required this.body, this.index = 0})
       : super(key: key);

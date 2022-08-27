@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:writer/ui/app_settings/pages/select_theme_page.dart';
+import 'package:writer/utils/utils.dart';
 import '../ui/home/home_page.dart';
 import 'router_paths.dart';
 
@@ -11,20 +11,22 @@ final mainAppRoutes = <GoRoute>[
   GoRoute(
       name: homePath,
       path: '/:page',
-      builder: (context, state) {
-        return HomePage(
-          key: state.pageKey,
-          index: homePathToIndex(string: state.params['page']!),
-        );
-      },
+      builder: (context, state) => HomePage(
+            key: state.pageKey,
+            index: homePathToIndex(string: state.params['page']!),
+          ),
       routes: settingsRoutes),
 ];
 
 final settingsRoutes = <GoRoute>[
   GoRoute(
-      name: selectThemePath,
-      path: selectThemePath,
-      builder: (context, state) => const SelectThemePage())
+    path: stringAboutApp,
+    name: stringAboutApp,
+    builder: (context, state) => HomePage(
+      key: state.pageKey,
+      index: homePathToIndex(string: state.params['page']!),
+    ),
+  )
 ];
 
 int homePathToIndex({String? string}) {

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:writer/models/app_projects.dart';
+import 'package:writer/logic/models/app_projects.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 part 'library_state.dart';

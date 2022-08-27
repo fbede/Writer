@@ -1,4 +1,3 @@
-//This file determines what version of the page to display
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:writer/router/main_routes.dart';
@@ -18,6 +17,7 @@ class DesktopHomePage extends StatefulWidget {
 
 class _DesktopHomePageState extends State<DesktopHomePage> {
   late int index;
+  List<Text> title = const <Text>[Text(stringLibrary), Text(stringSettings)];
 
   @override
   void initState() {
@@ -34,8 +34,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: Row(
+      child: Row(
         children: [
           buildNavRail(),
           Expanded(
@@ -45,27 +44,53 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
             ),
           ),
         ],
-      ),
-    ));
+      ), /* Scaffold(
+      /* appBar: AppBar(
+        title: title[index],
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.class_)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+        ],
+      ), */
+      body: 
+    ) */
+    );
   }
 
   //final body = <Widget>[Text('yo'), MobileNotesPage(), AppSettingsPage()];
 
-  buildNavRail() {
-    return NavigationRail(
-        destinations: const [
-          NavigationRailDestination(
-              icon: Icon(Icons.class_outlined),
-              label: Text(stringLibrary),
-              selectedIcon: Icon(Icons.class_)),
-          NavigationRailDestination(
-            icon: Icon(Icons.settings_outlined),
-            label: Text(stringSettings),
-            selectedIcon: Icon(Icons.settings),
-          ),
-        ],
-        selectedIndex: index,
-        onDestinationSelected: (i) => context
-            .goNamed(homePath, params: {'page': indexToHomePath(index: i)}));
-  }
+  buildNavRail() => Expanded(
+        child: ListView(
+          children: [
+            /* NavigationRail(
+                extended: true,
+                leading: Expanded(
+                    child: AspectRatio(
+                  aspectRatio: 1.0,
+                  child: Center(
+                      child: Text(
+                    stringAppName,
+                    style: Theme.of(context).textTheme.displaySmall,
+                  )),
+                )),
+                //minExtendedWidth: 140,
+                groupAlignment: 1,
+                useIndicator: false,
+                destinations: const [
+                  NavigationRailDestination(
+                      icon: Icon(Icons.class_outlined),
+                      label: Text(stringLibrary),
+                      selectedIcon: Icon(Icons.class_)),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.settings_outlined),
+                    label: Text(stringSettings),
+                    selectedIcon: Icon(Icons.settings),
+                  ),
+                ],
+                selectedIndex: index,
+                onDestinationSelected: (i) => context.goNamed(homePath,
+                    params: {'page': indexToHomePath(index: i)})), */
+          ],
+        ),
+      );
 }

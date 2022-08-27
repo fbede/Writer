@@ -14,7 +14,13 @@ class SelectThemeModeWidget extends StatefulWidget {
 }
 
 class _SelectThemeModeWidgetState extends State<SelectThemeModeWidget> {
-  ThemeMode selectedValue = ThemeMode.light;
+  late ThemeMode selectedValue;
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = context.read<SettingsCubit>().state.themeMode;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,6 +36,7 @@ class _SelectThemeModeWidgetState extends State<SelectThemeModeWidget> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
+          const Divider(),
           RadioListTile<ThemeMode>(
               value: ThemeMode.light,
               title: const Text(stringThemeModeLight),
@@ -65,6 +72,7 @@ class _SelectThemeModeWidgetState extends State<SelectThemeModeWidget> {
                         .read<SettingsCubit>()
                         .changeThemeMode(themeMode: selectedValue);
                   })),
+          const Divider()
         ],
       ),
     );
