@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:writer/ui/app_settings/pages/licenses_page.dart';
+import 'package:writer/ui/settings/pages/licenses_page.dart';
 
 import '../../../utils/utils.dart';
 

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:writer/ui/app_settings/cubit/cubit_converters.dart';
+import 'package:writer/ui/settings/cubit/cubit_converters.dart';
 
 part 'settings_state.dart';
 

@@ -7,8 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
-import 'package:writer/ui/app_settings/cubit/settings_cubit.dart';
-import 'package:writer/ui/common/cubits/ui_text_opacity_cubit.dart';
+import 'package:writer/ui/settings/cubit/settings_cubit.dart';
 import 'package:writer/ui/library/cubit/library_cubit.dart';
 import 'package:writer/utils/strings.dart';
 import 'router/main_routes.dart';
@@ -118,9 +117,9 @@ class SplashPage extends StatelessWidget {
                     BlocProvider(
                       create: (context) => SettingsCubit(prefs: prefs),
                     ),
-                    BlocProvider(
+                    /* BlocProvider(
                       create: (context) => TextOpacityCubit(),
-                    )
+                    ) */
                   ],
                   child: Builder(
                     builder: (context) {

@@ -1,12 +1,12 @@
-//Actual AppBar
 import 'package:flutter/material.dart';
 
+//SliverAppBar
 class SliverAppBarFactory extends StatelessWidget {
-  final double opacity;
   final String title;
   final bool isPinned;
+  final double opacity;
   const SliverAppBarFactory(
-      {Key? key, this.opacity = 0, this.title = '', this.isPinned = false})
+      {Key? key, this.title = '', this.isPinned = false, this.opacity = 1})
       : super(key: key);
 
   @override

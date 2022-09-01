@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:writer/ui/app_settings/pages/about_us_page.dart';
+
+import 'package:writer/ui/settings/pages/about_us_page.dart';
 import '../../../utils/utils.dart';
-import '../cubit/settings_cubit.dart';
+
+import '../functions/settings_functions.dart';
 import 'select_theme_mode_widget.dart';
 
 class SettingsBody extends StatelessWidget {
-  final BuildContext scafoldBuildContext;
-
-  const SettingsBody({Key? key, required this.scafoldBuildContext})
+  const SettingsBody(
+      {Key? key, this.isCollapsed = false, this.shouldShrinkWrap = false})
       : super(key: key);
+  final bool isCollapsed;
+  final bool shouldShrinkWrap;
+  final int isSelected = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    if (isCollapsed) {
+      return buildCollapsedForm(context);
+    }
+    return buildExpandedForm(context);
+  }
+
+  //This is the design of the sidebar when it is collapsed
+  Widget buildCollapsedForm(BuildContext context) => SizedBox.fromSize();
+
+  //This is the design of the sidebar when it is expanded
+  Widget buildExpandedForm(BuildContext context) {
+    return ListView(
+      shrinkWrap: shouldShrinkWrap,
       children: [
         //Theme ListTile
         ListTile(
@@ -47,27 +62,5 @@ class SettingsBody extends StatelessWidget {
         )
       ],
     );
-  }
-
-  Text getThemeSubtitle({required BuildContext context}) {
-    switch (context.read<SettingsCubit>().state.themeMode) {
-      case ThemeMode.dark:
-        return const Text(stringThemeModeDark);
-      case ThemeMode.light:
-        return const Text(stringThemeModeLight);
-      case ThemeMode.system:
-        return const Text(stringThemeModeSystem);
-    }
-  }
-
-  Icon getThemeIcon({required BuildContext context}) {
-    switch (context.read<SettingsCubit>().state.themeMode) {
-      case ThemeMode.dark:
-        return const Icon(Icons.dark_mode);
-      case ThemeMode.light:
-        return const Icon(Icons.light_mode);
-      case ThemeMode.system:
-        return const Icon(Icons.computer);
-    }
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:writer/ui/home/mobile_home_page.dart';
 import 'package:writer/ui/library/desktop_library_page.dart';
-import 'package:writer/utils/responsive_page.dart';
-import '../app_settings/pages/desktop_app_settings_page.dart';
-import '../app_settings/pages/mobile_app_settings_page.dart';
+
+import '../../utils/utils.dart';
+import '../settings/pages/desktop_settings_page.dart';
+import '../settings/pages/mobile_settings_page.dart';
 import '../library/mobile_library_page.dart';
 
 class HomePage extends StatelessWidget {

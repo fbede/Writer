@@ -1,45 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:writer/router/router_paths.dart';
-import 'package:writer/ui/app_settings/cubit/settings_cubit.dart';
-import 'package:writer/ui/common/cubits/ui_text_opacity_cubit.dart';
-import 'package:writer/ui/common/widgets.dart';
-import 'package:writer/utils/shapes.dart';
+import 'package:writer/ui/common/widgets/common_widgets.dart';
 import 'package:writer/utils/strings.dart';
 
-import '../../../router/main_routes.dart';
-import '../widgets/app_settings_widgets.dart';
+import '../../common/functions/ui_fuctions.dart';
+import '../widgets/settings_widgets.dart';
 
-class MobileAppSettingsPage extends StatelessWidget {
+class MobileAppSettingsPage extends StatefulWidget {
   const MobileAppSettingsPage({Key? key}) : super(key: key);
 
   @override
+  State<MobileAppSettingsPage> createState() => _MobileAppSettingsPageState();
+}
+
+class _MobileAppSettingsPageState extends State<MobileAppSettingsPage> {
+  late double opacity;
+
+  @override
+  void initState() {
+    super.initState();
+    opacity = 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final double opacity = context.watch<TextOpacityCubit>().state;
     return Scaffold(
 
         //Used to make the title fade as the user scrolls
         body: NotificationListener(
-      onNotification: ((ScrollMetricsNotification notification) => context
-          .read<TextOpacityCubit>()
-          .handleScrollNotification(
-              notification: notification, context: context)),
+      onNotification: ((ScrollMetricsNotification notification) {
+        setState(() {
+          opacity = handleScrollNotification(
+              notification: notification, context: context);
+        });
+        return true;
+      }),
       child: CustomScrollView(
         slivers: [
           //Invisible AppBar (Not noticed by user)
-          SliverAppBarFactory(
-            opacity: opacity,
-          ),
+          const SliverAppBarFactory(),
 
           //TitleWidget
           buildTitleBlock(context, opacity),
 
           //TrueAppBar
           SliverAppBarFactory(
-            opacity: opacity,
             title: stringSettings,
             isPinned: true,
+            opacity: opacity,
           ),
 
           //builds the body that shows the list of available settings
@@ -51,12 +58,12 @@ class MobileAppSettingsPage extends StatelessWidget {
 
 //builds the settings body
   SliverToBoxAdapter buildSettingsBody(BuildContext context) {
-    return SliverToBoxAdapter(
+    return const SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Card(
             child: SettingsBody(
-          scafoldBuildContext: context,
+          shouldShrinkWrap: true,
         )),
       ),
     );
