@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:writer/ui/settings/widgets/settings_body.dart';
-import '../../../router/main_routes.dart';
-import '../../../router/router_paths.dart';
+import 'package:writer/ui/settings/widgets/settings_body_max.dart';
+import 'package:writer/ui/settings/widgets/settings_body_min.dart';
+import '../../../router/router.dart';
 import '../../../utils/utils.dart';
 
 class LeftSideBar extends StatefulWidget {
@@ -36,7 +36,7 @@ class _LeftSideBarState extends State<LeftSideBar> {
     if (isCollapsed) {
       return Container(
         width: 60,
-        color: getAppBarBackgroundColor(context),
+        color: Theme.of(context).appBarTheme.backgroundColor,
         child: Column(
           children: [
             Padding(
@@ -51,14 +51,14 @@ class _LeftSideBarState extends State<LeftSideBar> {
             //Empty Expanded Space
             Expanded(
                 child: SizedBox.fromSize(
-              child: SettingsBody(isCollapsed: isCollapsed),
+              child: SettingsBodyMin(isCollapsed: isCollapsed),
             )),
 
             //Trailing icons
 
             IconButton(
                 onPressed: () => context.goNamed(homePath,
-                    params: {'page': indexToHomePath(index: 0)}),
+                    params: {homePath: indexToHomePath(index: 0)}),
                 icon: const Icon(Icons.class_)),
             const SizedBox(height: 8),
           ],
@@ -67,7 +67,7 @@ class _LeftSideBarState extends State<LeftSideBar> {
     }
     return Container(
         width: 300,
-        color: getAppBarBackgroundColor(context),
+        color: Theme.of(context).appBarTheme.backgroundColor,
         child: Column(children: [
           //Title
           Stack(
@@ -87,13 +87,18 @@ class _LeftSideBarState extends State<LeftSideBar> {
           //Empty Expanded Space
           Expanded(
               child: SizedBox.fromSize(
-                  child: SettingsBody(isCollapsed: isCollapsed))),
+                  child: Padding(
+            padding: const EdgeInsetsDirectional.only(start: 8.0, end: 8.0),
+            child: SettingsBodyMax(
+              index: 1,
+            ),
+          ))),
 
           ListTile(
             leading: const Icon(Icons.class_),
             title: const Text(stringLibrary),
-            onTap: () => context
-                .goNamed(homePath, params: {'page': indexToHomePath(index: 0)}),
+            onTap: () => context.goNamed(homePath,
+                params: {homePath: indexToHomePath(index: 0)}),
             onLongPress: () {},
           ),
 

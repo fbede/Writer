@@ -22,6 +22,12 @@ class _SelectThemeModeWidgetState extends State<SelectThemeModeWidget> {
   }
 
   @override
+  void didUpdateWidget(covariant SelectThemeModeWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    selectedValue = context.watch<SettingsCubit>().state.themeMode;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),

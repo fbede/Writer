@@ -62,7 +62,7 @@ class _MobileAppSettingsPageState extends State<MobileAppSettingsPage> {
       child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Card(
-            child: SettingsBody(
+            child: SettingsBodyMax(
           shouldShrinkWrap: true,
         )),
       ),

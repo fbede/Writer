@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../router/main_routes.dart';
-import '../../../router/router_paths.dart';
 import '../../../utils/utils.dart';
+import '../../router/router.dart';
 import 'cubit/library_cubit.dart';
 
 class LeftSideBar extends StatefulWidget {
@@ -37,7 +36,7 @@ class _LeftSideBarState extends State<LeftSideBar> {
     if (isCollapsed) {
       return Container(
         width: 60,
-        color: getAppBarBackgroundColor(context),
+        color: Theme.of(context).appBarTheme.backgroundColor,
         child: Column(
           children: [
             Padding(
@@ -60,7 +59,7 @@ class _LeftSideBarState extends State<LeftSideBar> {
             const SizedBox(height: 8),
             IconButton(
                 onPressed: () => context.goNamed(homePath,
-                    params: {'page': indexToHomePath(index: 1)}),
+                    params: {homePath: indexToHomePath(index: 1)}),
                 icon: const Icon(Icons.settings)),
             const SizedBox(height: 8),
             const SizedBox(height: 5)
@@ -70,7 +69,7 @@ class _LeftSideBarState extends State<LeftSideBar> {
     }
     return Container(
         width: 300,
-        color: getAppBarBackgroundColor(context),
+        color: Theme.of(context).appBarTheme.backgroundColor,
         child: Column(children: [
           //Title
           Stack(
@@ -105,8 +104,8 @@ class _LeftSideBarState extends State<LeftSideBar> {
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
-            onTap: () => context
-                .goNamed(homePath, params: {'page': indexToHomePath(index: 1)}),
+            onTap: () => context.goNamed(homePath,
+                params: {homePath: indexToHomePath(index: 1)}),
             onLongPress: () {},
           ),
 

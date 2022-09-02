@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:writer/utils/utils.dart';
 import '../ui/home/home_page.dart';
+import 'router_functions.dart';
 import 'router_paths.dart';
 
 final mainAppRoutes = <GoRoute>[
@@ -10,43 +10,22 @@ final mainAppRoutes = <GoRoute>[
   ),
   GoRoute(
       name: homePath,
-      path: '/:page',
+      path: '/:$homePath',
       builder: (context, state) => HomePage(
             key: state.pageKey,
-            index: homePathToIndex(string: state.params['page']!),
+            homeIndex: homePathToIndex(string: state.params[homePath]!),
           ),
       routes: settingsRoutes),
 ];
 
 final settingsRoutes = <GoRoute>[
   GoRoute(
-    path: stringAboutApp,
-    name: stringAboutApp,
+    path: ':$settingsPath',
+    name: settingsPath,
     builder: (context, state) => HomePage(
       key: state.pageKey,
-      index: homePathToIndex(string: state.params['page']!),
+      homeIndex: homePathToIndex(string: state.params[homePath]!),
+      settingsIndex: settingsPathToIndex(string: state.params[settingsPath]),
     ),
-  )
+  ),
 ];
-
-int homePathToIndex({String? string}) {
-  switch (string) {
-    case libraryPath:
-      return 0;
-    case settingsPath:
-      return 1;
-    default:
-      return 0;
-  }
-}
-
-String indexToHomePath({required int index}) {
-  switch (index) {
-    case 0:
-      return libraryPath;
-    case 1:
-      return settingsPath;
-    default:
-      return libraryPath;
-  }
-}

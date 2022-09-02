@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +12,11 @@ class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit({required this.prefs}) : super(SettingsInitial());
   final SharedPreferences prefs;
   final String stringThemeMode = 'themeMode';
+  final intGen = Random();
 
   changeThemeMode({required ThemeMode themeMode}) async {
     await prefs.setInt(stringThemeMode, themeModeToPrefs(themeMode));
-    emit(state.copyWith(themeMode: themeMode));
+    emit(state.copyWith(themeMode: themeMode, randomInt: intGen.nextInt(999)));
   }
 
   getThemeMode() {

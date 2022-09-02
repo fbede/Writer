@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:writer/router/router_paths.dart';
-import '../../router/main_routes.dart';
+import '../../router/router.dart';
 import '../../utils/strings.dart';
+import '../library/mobile_library_page.dart';
+import '../settings/pages/mobile_settings_page.dart';
 
 class MobileHomePage extends StatefulWidget {
-  const MobileHomePage({Key? key, required this.body, this.index = 0})
-      : super(key: key);
+  const MobileHomePage({Key? key, this.index = 0}) : super(key: key);
   final int index;
-  final List<Widget> body;
+  final body = const [MobileLibraryPage(), MobileAppSettingsPage()];
 
   @override
   State<MobileHomePage> createState() => _MobileHomePageState();
@@ -52,7 +51,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
       child: NavigationBar(
           selectedIndex: index,
           onDestinationSelected: (i) => context
-              .goNamed(homePath, params: {'page': indexToHomePath(index: i)}),
+              .goNamed(homePath, params: {homePath: indexToHomePath(index: i)}),
           destinations: const [
             NavigationDestination(
                 icon: Icon(Icons.class_outlined),

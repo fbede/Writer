@@ -6,8 +6,8 @@ import '../../../utils/utils.dart';
 import '../functions/settings_functions.dart';
 import 'select_theme_mode_widget.dart';
 
-class SettingsBody extends StatelessWidget {
-  const SettingsBody(
+class SettingsBodyMin extends StatelessWidget {
+  const SettingsBodyMin(
       {Key? key, this.isCollapsed = false, this.shouldShrinkWrap = false})
       : super(key: key);
   final bool isCollapsed;
@@ -35,13 +35,10 @@ class SettingsBody extends StatelessWidget {
           leading: getThemeIcon(context: context),
           title: const Text(stringTheme),
           subtitle: getThemeSubtitle(context: context),
-          onTap: () => showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              shape: bottomSheetShape,
-              builder: (context) => SelectThemeModeWidget(
-                    context: context,
-                  )),
+          onTap: () {
+            if (isMobile(context)) {
+            } else {}
+          },
           onLongPress: () {},
         ),
 
@@ -62,5 +59,18 @@ class SettingsBody extends StatelessWidget {
         )
       ],
     );
+  }
+
+  //this runs when the theme select button is pressed
+  selectTheme(BuildContext context, int index) {
+    if (isMobile(context)) {
+      showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          shape: bottomSheetShape,
+          builder: (context) => SelectThemeModeWidget(
+                context: context,
+              ));
+    } else {}
   }
 }

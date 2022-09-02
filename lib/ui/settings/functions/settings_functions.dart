@@ -5,7 +5,7 @@ import '../../../utils/utils.dart';
 import '../cubit/settings_cubit.dart';
 
 Text getThemeSubtitle({required BuildContext context}) {
-  switch (context.read<SettingsCubit>().state.themeMode) {
+  switch (context.watch<SettingsCubit>().state.themeMode) {
     case ThemeMode.dark:
       return const Text(stringThemeModeDark);
     case ThemeMode.light:
@@ -16,7 +16,7 @@ Text getThemeSubtitle({required BuildContext context}) {
 }
 
 Icon getThemeIcon({required BuildContext context}) {
-  switch (context.read<SettingsCubit>().state.themeMode) {
+  switch (context.watch<SettingsCubit>().state.themeMode) {
     case ThemeMode.dark:
       return const Icon(Icons.dark_mode);
     case ThemeMode.light:
@@ -25,5 +25,3 @@ Icon getThemeIcon({required BuildContext context}) {
       return const Icon(Icons.computer);
   }
 }
-
-selectTheme(BuildContext context) {}

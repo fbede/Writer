@@ -9,9 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
 import 'package:writer/ui/settings/cubit/settings_cubit.dart';
 import 'package:writer/ui/library/cubit/library_cubit.dart';
-import 'package:writer/utils/strings.dart';
 import 'router/main_routes.dart';
-import 'utils/color_schemes.dart';
+import 'utils/utils.dart';
 
 // TODO 1b: Clean code especiallly mobile app settings. Extract widgets that would be useful for desktop view
 // TODO 2: Maybe Add LanguageScreen
@@ -35,14 +34,8 @@ class MyApp extends StatelessWidget {
       //check constants.dart file for details
       title: stringAppName,
       themeMode: ThemeMode.system,
-      theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: lightColorScheme,
-          visualDensity: VisualDensity.adaptivePlatformDensity),
-      darkTheme: ThemeData(
-          useMaterial3: true,
-          colorScheme: darkColorScheme,
-          visualDensity: VisualDensity.adaptivePlatformDensity),
+      theme: lightThemeData,
+      darkTheme: darkThemeData,
       debugShowCheckedModeBanner: false,
     );
   }
@@ -56,15 +49,15 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: EasySplashScreen(
-        logo: Image.asset(''),
+        logo: Image.asset('lib/assets/logo.png'),
         title: Text(
           stringAppName,
           style: Theme.of(context)
               .textTheme
               .displayLarge
-              ?.copyWith(color: getAppBarForgroundColor(context)),
+              ?.copyWith(color: Theme.of(context).appBarTheme.foregroundColor),
         ),
-        backgroundColor: getAppBarBackgroundColor(context),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor as Color,
         showLoader: true,
         loadingText: const Text(''),
         futureNavigator: futureCall(),
@@ -131,16 +124,8 @@ class SplashPage extends StatelessWidget {
                         title: 'Flutter Demo',
                         themeMode:
                             context.watch<SettingsCubit>().state.themeMode,
-                        theme: ThemeData(
-                            useMaterial3: true,
-                            colorScheme: lightColorScheme,
-                            visualDensity:
-                                VisualDensity.adaptivePlatformDensity),
-                        darkTheme: ThemeData(
-                            useMaterial3: true,
-                            colorScheme: darkColorScheme,
-                            visualDensity:
-                                VisualDensity.adaptivePlatformDensity),
+                        theme: lightThemeData,
+                        darkTheme: darkThemeData,
                         routeInformationProvider:
                             router.routeInformationProvider,
                         routeInformationParser: router.routeInformationParser,

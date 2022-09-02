@@ -16,7 +16,7 @@ class DesktopLibraryPage extends StatelessWidget {
 
             //Right Section
             //TODO: Implement Desktop Right Section
-            const Expanded(child: Text('yo'))
+            const Expanded(child: Scaffold())
           ],
         ),
       );

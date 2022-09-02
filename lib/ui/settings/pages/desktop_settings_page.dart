@@ -3,8 +3,30 @@ import 'package:writer/ui/settings/widgets/settings_widgets.dart';
 
 import '../../../utils/utils.dart';
 
-class DesktopAppSettingsPage extends StatelessWidget {
-  const DesktopAppSettingsPage({Key? key}) : super(key: key);
+class DesktopAppSettingsPage extends StatefulWidget {
+  const DesktopAppSettingsPage({Key? key, this.selectedIndex = 0})
+      : super(key: key);
+
+  final int selectedIndex;
+
+  @override
+  State<DesktopAppSettingsPage> createState() => _DesktopAppSettingsPageState();
+}
+
+class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
+  late int selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.selectedIndex;
+  }
+
+  @override
+  void didUpdateWidget(covariant DesktopAppSettingsPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    selectedIndex = widget.selectedIndex;
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -18,7 +40,12 @@ class DesktopAppSettingsPage extends StatelessWidget {
           const VerticalDivider(width: 2),
           //Right Section
           //TODO: Implement Desktop Right Section
-          const Expanded(flex: 1, child: SettingsBody()),
+          Expanded(
+              child: Scaffold(
+                  body: Padding(
+            padding: EdgeInsetsDirectional.all(8.0),
+            child: Container(),
+          ))),
         ],
       ));
 }

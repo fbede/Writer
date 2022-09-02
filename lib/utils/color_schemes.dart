@@ -1,17 +1,5 @@
 import 'package:flutter/material.dart';
 
-getAppBarBackgroundColor(BuildContext context) {
-  if (Theme.of(context).brightness == Brightness.dark) {
-    return Theme.of(context).colorScheme.surface;
-  }
-}
-
-getAppBarForgroundColor(BuildContext context) {
-  if (Theme.of(context).brightness == Brightness.dark) {
-    return Theme.of(context).colorScheme.onSurface;
-  }
-}
-
 const oldLightColorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFF006A6A),
