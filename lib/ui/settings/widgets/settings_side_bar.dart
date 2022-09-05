@@ -56,11 +56,10 @@ class _SettingsSideBarState extends State<SettingsSideBar> {
             //Empty Expanded Space
             Expanded(
                 child: SizedBox.fromSize(
-              child: MobileSettingsBodyMin(isCollapsed: isCollapsed),
+              child: MobileSettingsBodyMin(index: selectedIndex),
             )),
 
             //Trailing icons
-
             IconButton(
                 onPressed: () => context.goNamed(homePath,
                     params: {homePath: indexToHomePath(index: 0)}),

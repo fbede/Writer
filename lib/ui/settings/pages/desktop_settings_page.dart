@@ -42,7 +42,7 @@ class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
           const VerticalDivider(width: 2),
 
           //Right Section
-          //TODO: Implement Desktop Right Section
+          //TODO: Fix bug where side bar uncollapses when new option is selected
           Expanded(
               child: Scaffold(
                   appBar: buildAppBar(selectedIndex),

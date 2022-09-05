@@ -1,76 +1,44 @@
 import 'package:flutter/material.dart';
-
-import 'package:writer/ui/settings/pages/about_us_page.dart';
-import '../../../utils/utils.dart';
-
 import '../functions/settings_functions.dart';
-import 'select_theme_mode_widget.dart';
 
 class MobileSettingsBodyMin extends StatelessWidget {
-  const MobileSettingsBodyMin(
-      {Key? key, this.isCollapsed = false, this.shouldShrinkWrap = false})
-      : super(key: key);
-  final bool isCollapsed;
-  final bool shouldShrinkWrap;
-  final int isSelected = 0;
+  const MobileSettingsBodyMin({Key? key, this.index = 1}) : super(key: key);
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    if (isCollapsed) {
-      return buildCollapsedForm(context);
-    }
-    return buildExpandedForm(context);
-  }
-
-  //This is the design of the sidebar when it is collapsed
-  Widget buildCollapsedForm(BuildContext context) => SizedBox.fromSize();
-
-  //This is the design of the sidebar when it is expanded
-  Widget buildExpandedForm(BuildContext context) {
     return ListView(
-      shrinkWrap: shouldShrinkWrap,
       children: [
-        //Theme ListTile
-        ListTile(
-          leading: getThemeIcon(context: context),
-          title: const Text(stringTheme),
-          subtitle: getThemeSubtitle(context: context),
-          onTap: () {
-            if (isMobile(context)) {
-            } else {}
-          },
-          onLongPress: () {},
-        ),
+        //Theme IconButton
+        IconButton(
+            onPressed: () => handleTap(context, 1),
+            icon: getMinThemeIcon(context, 1)),
 
-        const Divider(),
-
-        //About ListTile
-        //TODO: Add legalese and details later
-        ListTile(
-          leading: const Icon(
-            Icons.info,
-          ),
-          title: const Text(stringAboutApp),
-          subtitle: const Text(stringAppVersion),
-          //implement go_router after desktop
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AboutAppPage())),
-          onLongPress: () {},
-        )
+        //AboutApp IconButton
+        IconButton(
+            onPressed: () => handleTap(context, 2),
+            icon: Icon(
+              Icons.info,
+              color: colorIcon(context, 2),
+            ))
       ],
     );
   }
 
-  //this runs when the theme select button is pressed
-  selectTheme(BuildContext context, int index) {
-    if (isMobile(context)) {
-      showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          shape: bottomSheetShape,
-          builder: (context) => SelectThemeModeWidget(
-                context: context,
-              ));
-    } else {}
+  getMinThemeIcon(BuildContext context, int index) {
+    if (this.index == index) {
+      return IconTheme(
+          data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
+          child: getThemeIcon(context: context));
+    } else {
+      return getThemeIcon(context: context);
+    }
+  }
+
+  colorIcon(BuildContext context, int index) {
+    if (this.index == index) {
+      return Theme.of(context).colorScheme.secondary;
+    }
   }
 }
