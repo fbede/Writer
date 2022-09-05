@@ -5,7 +5,9 @@ const String settingsPath = 'settings';
 
 //settings paths
 const String selectThemePath = 'selectTheme';
-const String aboutUsPath = 'aboutUs';
+const String aboutAppPath = 'aboutApp';
+const String licensesPagePath = 'licensesPage';
+
 //unused paths
 const String notesPath = 'notes';
 const String splashPath = '/splash';

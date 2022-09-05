@@ -6,9 +6,8 @@ final lightThemeData = ThemeData(
     useMaterial3: true,
     colorScheme: lightColorScheme,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    listTileTheme: ListTileThemeData(
-        selectedColor: lightColorScheme.onPrimary,
-        selectedTileColor: lightColorScheme.primary));
+    listTileTheme:
+        ListTileThemeData(selectedColor: lightColorScheme.secondary));
 
 final darkThemeData = ThemeData(
     useMaterial3: true,
@@ -17,6 +16,4 @@ final darkThemeData = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: darkColorScheme.surface,
         foregroundColor: darkColorScheme.onSurface),
-    listTileTheme: ListTileThemeData(
-        selectedColor: darkColorScheme.onPrimary,
-        selectedTileColor: darkColorScheme.primary));
+    listTileTheme: ListTileThemeData(selectedColor: darkColorScheme.secondary));

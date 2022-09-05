@@ -24,7 +24,7 @@ bool isMobile(BuildContext context) {
 
 //determines if sidebars should automatically collapse
 bool shouldCollapse(BuildContext context) {
-  if (MediaQuery.of(context).size.width <= 600) {
+  if (MediaQuery.of(context).size.width <= 750) {
     return true;
   } else {
     return false;

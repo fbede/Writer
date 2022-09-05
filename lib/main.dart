@@ -12,7 +12,6 @@ import 'package:writer/ui/library/cubit/library_cubit.dart';
 import 'router/main_routes.dart';
 import 'utils/utils.dart';
 
-// TODO 1b: Clean code especiallly mobile app settings. Extract widgets that would be useful for desktop view
 // TODO 2: Maybe Add LanguageScreen
 // TODO 3: Add OnboardingScreen
 // TODO 4: Add LoginScreen
@@ -79,7 +78,7 @@ class SplashPage extends StatelessWidget {
         //can replace with another package...
         //window_manager
         setWindowTitle(stringAppName);
-        setWindowMinSize(const Size(300, 300));
+        setWindowMinSize(const Size(300, 600));
         setWindowMaxSize(Size.infinite);
       }
     }

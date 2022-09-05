@@ -26,7 +26,7 @@ int settingsPathToIndex({String? string}) {
   switch (string) {
     case selectThemePath:
       return 1;
-    case aboutUsPath:
+    case aboutAppPath:
       return 2;
     default:
       return 0;
@@ -38,7 +38,7 @@ String indexToSettingsPath({required int index}) {
     case 1:
       return selectThemePath;
     case 2:
-      return aboutUsPath;
+      return aboutAppPath;
     default:
       return '';
   }

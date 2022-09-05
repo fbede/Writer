@@ -1,0 +1,15 @@
+icons_launcher:
+    image_path: 'lib/assets/logo.png'
+    platforms:
+      android:
+        enable: true
+      ios:
+        enable: true
+      macos:
+        enable: true
+      linux:
+        enable: true
+      web:
+        enable: true
+      windows:
+        enable: true

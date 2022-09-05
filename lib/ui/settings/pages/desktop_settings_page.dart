@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:writer/ui/settings/pages/about_us_page.dart';
 import 'package:writer/ui/settings/widgets/settings_widgets.dart';
 
 import '../../../utils/utils.dart';
 
 class DesktopAppSettingsPage extends StatefulWidget {
-  const DesktopAppSettingsPage({Key? key, this.selectedIndex = 0})
+  const DesktopAppSettingsPage({Key? key, this.selectedIndex = 1})
       : super(key: key);
 
   final int selectedIndex;
@@ -33,19 +34,41 @@ class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
           body: Row(
         children: [
           //Left Section
-          LeftSideBar(
+          SettingsSideBar(
             isCollapsed: shouldCollapse(context),
+            selectedIndex: selectedIndex,
           ),
 
           const VerticalDivider(width: 2),
+
           //Right Section
           //TODO: Implement Desktop Right Section
           Expanded(
               child: Scaffold(
+                  appBar: buildAppBar(selectedIndex),
                   body: Padding(
-            padding: EdgeInsetsDirectional.all(8.0),
-            child: Container(),
-          ))),
+                    padding: const EdgeInsetsDirectional.all(8.0),
+                    child: IndexedStack(
+                      index: selectedIndex,
+                      //list of all possible children pages
+                      children: const [
+                        SizedBox(), //nothing should be here
+                        SelectThemeModeWidget(),
+                        AboutAppPageBody()
+                      ],
+                    ),
+                  ))),
         ],
       ));
+
+  //builds the appbar for the page
+  buildAppBar(int index) {
+    if (index == 1) {
+    } else {
+      return AppBar(
+          title: const Text(stringAboutApp),
+          centerTitle: true,
+          automaticallyImplyLeading: false);
+    }
+  }
 }

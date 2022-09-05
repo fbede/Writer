@@ -104,8 +104,10 @@ class _LeftSideBarState extends State<LeftSideBar> {
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
-            onTap: () => context.goNamed(homePath,
-                params: {homePath: indexToHomePath(index: 1)}),
+            onTap: () => context.goNamed(settingsPath, params: {
+              homePath: indexToHomePath(index: 1),
+              settingsPath: indexToSettingsPath(index: 1)
+            }),
             onLongPress: () {},
           ),
 

@@ -6,8 +6,8 @@ import '../../../utils/utils.dart';
 import '../functions/settings_functions.dart';
 import 'select_theme_mode_widget.dart';
 
-class SettingsBodyMin extends StatelessWidget {
-  const SettingsBodyMin(
+class MobileSettingsBodyMin extends StatelessWidget {
+  const MobileSettingsBodyMin(
       {Key? key, this.isCollapsed = false, this.shouldShrinkWrap = false})
       : super(key: key);
   final bool isCollapsed;
@@ -54,7 +54,7 @@ class SettingsBodyMin extends StatelessWidget {
           subtitle: const Text(stringAppVersion),
           //implement go_router after desktop
           onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AboutUsPage())),
+              MaterialPageRoute(builder: (context) => const AboutAppPage())),
           onLongPress: () {},
         )
       ],

@@ -30,51 +30,18 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class DesktopHomePage extends StatefulWidget {
-  const DesktopHomePage({Key? key, homeIndex = 0, settingsIndex = 0})
-      : _homeIndex = homeIndex,
-        _settingsIndex = settingsIndex,
-        _key = key as Key,
-        super(key: key);
-  final Key _key;
-  final int _homeIndex;
-  final int _settingsIndex;
+class DesktopHomePage extends StatelessWidget {
+  const DesktopHomePage({Key? key, this.homeIndex = 0, this.settingsIndex = 0})
+      : super(key: key);
 
-  @override
-  State<DesktopHomePage> createState() => _DesktopHomePageState();
-}
-
-class _DesktopHomePageState extends State<DesktopHomePage> {
-  late Key key;
-  late int homeIndex;
-  late int settingsIndex;
-  late final List<Widget> body;
-
-  @override
-  void initState() {
-    super.initState();
-    key = widget._key;
-    homeIndex = widget._homeIndex;
-    settingsIndex = widget._settingsIndex;
-    body = [
-      const DesktopLibraryPage(),
-      DesktopAppSettingsPage(selectedIndex: settingsIndex)
-    ];
-  }
-
-  @override
-  void didUpdateWidget(covariant DesktopHomePage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    key = widget._key;
-    homeIndex = widget._homeIndex;
-    settingsIndex = widget._settingsIndex;
-  }
+  final int homeIndex;
+  final int settingsIndex;
 
   @override
   Widget build(BuildContext context) {
-    return IndexedStack(
-      index: homeIndex,
-      children: body,
-    );
+    return IndexedStack(index: homeIndex, children: [
+      const DesktopLibraryPage(),
+      DesktopAppSettingsPage(selectedIndex: settingsIndex)
+    ]);
   }
 }
