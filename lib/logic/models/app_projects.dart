@@ -1,21 +1,32 @@
-class AppProjects {
+import 'dart:ui';
+
+class LibraryProject {
   String projectTitle;
   String authorsName;
   DateTime dateCreated;
   DateTime? lastmodified;
+  Image? coverPhoto;
 
-  AppProjects(
+  LibraryProject(
       {required this.projectTitle,
       this.lastmodified,
-      required this.authorsName})
+      required this.authorsName,
+      this.coverPhoto})
       : dateCreated = DateTime.now().toUtc();
 }
 
-class Books extends AppProjects {
-  Books({required super.projectTitle, required super.authorsName});
+class LibraryBook extends LibraryProject {
+  LibraryBook(
+      {required super.projectTitle,
+      required super.authorsName,
+      super.coverPhoto});
 }
 
-class Series extends AppProjects {
-  List<Books> books = [];
-  Series({required super.projectTitle, required super.authorsName});
+class LibrarySeries extends LibraryProject {
+  List<LibraryBook> books;
+  LibrarySeries(
+      {required super.projectTitle,
+      required super.authorsName,
+      super.coverPhoto,
+      this.books = const []});
 }

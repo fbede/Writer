@@ -1,6 +1,8 @@
 //This file contains all strings in the app that are viewed by the user and might need to be translated
 //General App strings
 const stringAppName = 'StoryFi';
+const stringEdit = 'Edit';
+const stringDuplicate = 'Duplicate';
 const stringDelete = 'Delete';
 const stringSave = 'Save';
 const stringAppVersion = 'Version: 0.1.0';
@@ -11,6 +13,8 @@ const stringCreateNewBook = 'Create New Book';
 const stringCreateNewSeries = 'Create New Series';
 const stringBooksLabel = 'Books: ';
 const stringSeriesLabel = 'Series: ';
+const stringConvertToBook = 'Convert To Book';
+const stringConvertToSeries = 'Convert To Series';
 
 //Settings Strings
 const stringSettings = 'Settings';

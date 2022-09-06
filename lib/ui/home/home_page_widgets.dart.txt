@@ -1,44 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:writer/app/cubits/library_cubit.dart';
-import '../../utils/strings.dart';
-import '../cubits/home_page_cubit.dart';
-
-// This file contains widgets that are common to both tablet and mobile home views
-
-//SpeedDial or FloatingActionButton
-class HomePageFloatingActionButton extends StatelessWidget {
-  const HomePageFloatingActionButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SpeedDial(
-      animationDuration: const Duration(milliseconds: 250),
-      animatedIcon: AnimatedIcons.menu_close,
-      overlayOpacity: 0.0,
-      spacing: 12,
-      spaceBetweenChildren: 12,
-      children: [
-        SpeedDialChild(
-            child: const Icon(Icons.book),
-            label: stringCreateNewBook,
-            onTap: () {
-              context.read<HomePageCubit>().createNewBook();
-            }),
-        SpeedDialChild(
-            child: const Icon(Icons.folder),
-            label: stringCreateNewSeries,
-            onTap: () {
-              context.read<HomePageCubit>().createNewSeries();
-            })
-      ],
-    );
-  }
-}
 
 // This is how the grid view looks on all layouts
 class ProjectGridView extends StatelessWidget {
@@ -117,23 +76,7 @@ class ProjectView extends StatelessWidget {
                     ),
                   ),
 
-                  //TODO change to menu button
-                  PopupMenuButton(
-                      elevation: 2,
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      icon: const Icon(Icons.more_vert),
-                      itemBuilder: (BuildContext context) {
-                        //These are the menu items for right hand click
-
-                        final List<PopupMenuItem> homePageMenuItems = [
-                          // TODO Add more functionality like Covert to series or convert to book etc
-                          PopupMenuItem(
-                            onTap: context.read<HomePageCubit>().deletesASeries,
-                            child: const Text(stringDelete),
-                          )
-                        ];
-                        return homePageMenuItems;
-                      })
+                  
                 ],
               )
             ],

@@ -74,7 +74,7 @@ class _LibrarySideBarState extends State<LibrarySideBar> {
           //Title
           Stack(
             children: [
-              buildTitle(context),
+              const LibraryTitleBlock(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
@@ -116,38 +116,45 @@ class _LibrarySideBarState extends State<LibrarySideBar> {
   }
 }
 
-//Build title
-Widget buildTitle(BuildContext context, {double opacity = 0}) {
-  return AspectRatio(
-    aspectRatio: 1.0,
-    child: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Opacity(
-            opacity: 1 - opacity,
-            child: Text(stringLibrary,
-                style: Theme.of(context).textTheme.displayMedium),
-          ),
-          const SizedBox(height: 14),
-          Opacity(
-            opacity: 1 - opacity,
-            child: Text(
-              'Series: ${context.watch<LibraryCubit>().state.projectNum}',
-              style: Theme.of(context).textTheme.titleMedium,
+//this is the title block used in the library pages
+class LibraryTitleBlock extends StatelessWidget {
+  const LibraryTitleBlock({Key? key, this.opacity = 0}) : super(key: key);
+
+  final double opacity;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 1.0,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Opacity(
+              opacity: 1 - opacity,
+              child: Text(stringLibrary,
+                  style: Theme.of(context).textTheme.displayMedium),
             ),
-          ),
-          const SizedBox(height: 5),
-          Opacity(
-            opacity: 1 - opacity,
-            child: Text(
-              'Books: ${context.watch<LibraryCubit>().state.projectNum}',
-              style: Theme.of(context).textTheme.titleMedium,
+            const SizedBox(height: 14),
+            Opacity(
+              opacity: 1 - opacity,
+              child: Text(
+                'Series: ${context.watch<LibraryCubit>().state.seriesNum}',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 5),
+            Opacity(
+              opacity: 1 - opacity,
+              child: Text(
+                'Books: ${context.watch<LibraryCubit>().state.bookNum}',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
