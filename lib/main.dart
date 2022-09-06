@@ -115,9 +115,6 @@ class SplashPage extends StatelessWidget {
                   ],
                   child: Builder(
                     builder: (context) {
-                      //loads the current themeMode into memory (App state)
-                      context.read<SettingsCubit>().getThemeMode();
-
                       //returns actual app
                       return MaterialApp.router(
                         title: 'Flutter Demo',

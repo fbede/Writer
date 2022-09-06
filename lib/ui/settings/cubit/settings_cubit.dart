@@ -9,7 +9,7 @@ import 'package:writer/ui/settings/cubit/cubit_converters.dart';
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  SettingsCubit({required this.prefs}) : super(SettingsInitial());
+  SettingsCubit({required this.prefs}) : super(SettingsInitial(prefs: prefs));
   final SharedPreferences prefs;
   final String stringThemeMode = 'themeMode';
   final intGen = Random();

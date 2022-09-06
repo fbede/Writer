@@ -17,4 +17,8 @@ class SettingsState extends Equatable {
   }
 }
 
-class SettingsInitial extends SettingsState {}
+class SettingsInitial extends SettingsState {
+  final SharedPreferences prefs;
+  SettingsInitial({required this.prefs})
+      : super(themeMode: themeModeFromPrefs(prefs.getInt('themeMode')));
+}

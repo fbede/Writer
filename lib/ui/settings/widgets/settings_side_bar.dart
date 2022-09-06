@@ -5,36 +5,16 @@ import 'package:writer/ui/settings/widgets/mobile_settings_body_min.dart';
 import '../../../router/router.dart';
 import '../../../utils/utils.dart';
 
-class SettingsSideBar extends StatefulWidget {
-  const SettingsSideBar({
-    Key? key,
-    this.isCollapsed = false,
-    this.selectedIndex = 1,
-  }) : super(key: key);
+class SettingsSideBar extends StatelessWidget {
+  const SettingsSideBar(
+      {Key? key,
+      this.isCollapsed = false,
+      this.selectedIndex = 1,
+      required this.collapse})
+      : super(key: key);
   final bool isCollapsed;
   final int selectedIndex;
-
-  @override
-  State<SettingsSideBar> createState() => _SettingsSideBarState();
-}
-
-class _SettingsSideBarState extends State<SettingsSideBar> {
-  late bool isCollapsed;
-  late int selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    isCollapsed = widget.isCollapsed;
-    selectedIndex = widget.selectedIndex;
-  }
-
-  @override
-  void didUpdateWidget(covariant SettingsSideBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    isCollapsed = widget.isCollapsed;
-    selectedIndex = widget.selectedIndex;
-  }
+  final Function collapse;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +27,7 @@ class _SettingsSideBarState extends State<SettingsSideBar> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
-                  onPressed: () => setState(() {
-                        isCollapsed = !isCollapsed;
-                      }),
-                  icon: const Icon(Icons.menu)),
+                  onPressed: () => collapse(), icon: const Icon(Icons.menu)),
             ),
 
             //Empty Expanded Space
@@ -80,10 +57,7 @@ class _SettingsSideBarState extends State<SettingsSideBar> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                    onPressed: () => setState(() {
-                          isCollapsed = !isCollapsed;
-                        }),
-                    icon: const Icon(Icons.menu)),
+                    onPressed: () => collapse(), icon: const Icon(Icons.menu)),
               ),
             ],
           ),

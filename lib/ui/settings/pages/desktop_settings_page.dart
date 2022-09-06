@@ -16,17 +16,27 @@ class DesktopAppSettingsPage extends StatefulWidget {
 
 class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
   late int selectedIndex;
+  late bool isCollapsed;
+  //late Function collapse;
+  late bool userSetIsCollapsed;
 
   @override
   void initState() {
     super.initState();
     selectedIndex = widget.selectedIndex;
+    isCollapsed = false;
+    /* collapse = () => setState(() {
+          isCollapsed = !isCollapsed;
+          userSetIsCollapsed = true;
+        }); */
+    userSetIsCollapsed = false;
   }
 
   @override
   void didUpdateWidget(covariant DesktopAppSettingsPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     selectedIndex = widget.selectedIndex;
+    isCollapsed = shouldCollapse(context, isCollapsed);
   }
 
   @override
@@ -35,7 +45,8 @@ class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
         children: [
           //Left Section
           SettingsSideBar(
-            isCollapsed: shouldCollapse(context),
+            collapse: collapse,
+            isCollapsed: isCollapsed,
             selectedIndex: selectedIndex,
           ),
 
@@ -43,6 +54,7 @@ class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
 
           //Right Section
           //TODO: Fix bug where side bar uncollapses when new option is selected
+          //use a 'ui' cubit to know whether to collapse or not
           Expanded(
               child: Scaffold(
                   appBar: buildAppBar(selectedIndex),
@@ -70,5 +82,12 @@ class _DesktopAppSettingsPageState extends State<DesktopAppSettingsPage> {
           centerTitle: true,
           automaticallyImplyLeading: false);
     }
+  }
+
+  collapse() {
+    setState(() {
+      isCollapsed = !isCollapsed;
+      userSetIsCollapsed = true;
+    });
   }
 }

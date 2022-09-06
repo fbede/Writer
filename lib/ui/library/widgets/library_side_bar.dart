@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../utils/utils.dart';
-import '../../router/router.dart';
-import 'cubit/library_cubit.dart';
+import '../../../../utils/utils.dart';
+import '../../../router/router.dart';
+import '../cubit/library_cubit.dart';
 
-class LeftSideBar extends StatefulWidget {
-  const LeftSideBar({
+class LibrarySideBar extends StatefulWidget {
+  const LibrarySideBar({
     Key? key,
     this.isCollapsed = false,
   }) : super(key: key);
   final bool isCollapsed;
 
   @override
-  State<LeftSideBar> createState() => _LeftSideBarState();
+  State<LibrarySideBar> createState() => _LibrarySideBarState();
 }
 
-class _LeftSideBarState extends State<LeftSideBar> {
+class _LibrarySideBarState extends State<LibrarySideBar> {
   late bool isCollapsed;
 
   @override
@@ -26,7 +26,7 @@ class _LeftSideBarState extends State<LeftSideBar> {
   }
 
   @override
-  void didUpdateWidget(covariant LeftSideBar oldWidget) {
+  void didUpdateWidget(covariant LibrarySideBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     isCollapsed = widget.isCollapsed;
   }

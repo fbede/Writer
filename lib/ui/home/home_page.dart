@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:writer/ui/home/mobile_home_page.dart';
-import 'package:writer/ui/library/desktop_library_page.dart';
+import 'package:writer/ui/library/pages/desktop_library_page.dart';
 
 import '../../utils/utils.dart';
 import '../settings/pages/desktop_settings_page.dart';

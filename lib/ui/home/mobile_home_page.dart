@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../router/router.dart';
 import '../../utils/strings.dart';
-import '../library/mobile_library_page.dart';
+import '../library/pages/mobile_library_page.dart';
 import '../settings/pages/mobile_settings_page.dart';
 
 class MobileHomePage extends StatefulWidget {

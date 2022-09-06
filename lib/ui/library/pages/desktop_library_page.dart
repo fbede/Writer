@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../utils/utils.dart';
-import 'library_widgets.dart';
+import '../../../utils/utils.dart';
+import '../widgets/library_side_bar.dart';
 
 class DesktopLibraryPage extends StatelessWidget {
   const DesktopLibraryPage({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class DesktopLibraryPage extends StatelessWidget {
         body: Row(
           children: [
             //Left Section
-            LeftSideBar(isCollapsed: shouldCollapse(context)),
+            LibrarySideBar(isCollapsed: shouldCollapse(context, false)),
 
             const VerticalDivider(width: 2),
 

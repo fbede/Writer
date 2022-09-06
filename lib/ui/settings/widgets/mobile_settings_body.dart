@@ -4,12 +4,12 @@ import '../functions/settings_functions.dart';
 
 class MobileSettingsBody extends StatelessWidget {
   const MobileSettingsBody(
-      {Key? key, this.shouldShrinkWrap = false, this.index = 1})
+      {Key? key, this.shouldShrinkWrap = false, this.index})
       : super(key: key);
 
   //!used by mobilepage! Dont remove.
   final bool shouldShrinkWrap;
-  final int index;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,6 @@ class MobileSettingsBody extends StatelessWidget {
           ),
           title: const Text(stringAboutApp),
           subtitle: const Text(stringAppVersion),
-          //implement go_router after desktop
           onTap: () => handleTap(context, 2),
           onLongPress: () {},
         )

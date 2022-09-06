@@ -23,7 +23,19 @@ bool isMobile(BuildContext context) {
 }
 
 //determines if sidebars should automatically collapse
-bool shouldCollapse(BuildContext context) {
+bool shouldCollapse(BuildContext context, bool isCollapsed,
+    {bool userSetIsCollapsed = false}) {
+  if (userSetIsCollapsed && isCollapsed) {
+    return true;
+    /* }
+  if (!userSetIsCollapsed) {
+    return shouldAutoCollapse(context); */
+  } else {
+    return shouldAutoCollapse(context);
+  }
+}
+
+bool shouldAutoCollapse(BuildContext context) {
   if (MediaQuery.of(context).size.width <= 750) {
     return true;
   } else {

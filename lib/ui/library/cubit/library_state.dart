@@ -21,5 +21,5 @@ class LibraryState extends Equatable {
 }
 
 class LibraryStateInitial extends LibraryState {
-  const LibraryStateInitial({required super.projectList});
+  const LibraryStateInitial() : super(projectList: const []);
 }
