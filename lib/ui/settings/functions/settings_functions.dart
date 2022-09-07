@@ -53,3 +53,14 @@ handleTap(BuildContext context, int index) {
     });
   }
 }
+
+//builds the appbar for the pages
+buildSecondaryAppBar(int index) {
+  if (index == 1) {
+  } else {
+    return AppBar(
+        title: const Text(stringAboutApp),
+        centerTitle: true,
+        automaticallyImplyLeading: false);
+  }
+}

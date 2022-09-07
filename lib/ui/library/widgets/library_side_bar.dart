@@ -5,86 +5,19 @@ import '../../../../utils/utils.dart';
 import '../../../router/router.dart';
 import '../cubit/library_cubit.dart';
 
-class LibrarySideBar extends StatefulWidget {
+class LibrarySideBar extends StatelessWidget {
   const LibrarySideBar({
     Key? key,
-    this.isCollapsed = false,
   }) : super(key: key);
-  final bool isCollapsed;
-
-  @override
-  State<LibrarySideBar> createState() => _LibrarySideBarState();
-}
-
-class _LibrarySideBarState extends State<LibrarySideBar> {
-  late bool isCollapsed;
-
-  @override
-  void initState() {
-    super.initState();
-    isCollapsed = widget.isCollapsed;
-  }
-
-  @override
-  void didUpdateWidget(covariant LibrarySideBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    isCollapsed = widget.isCollapsed;
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (isCollapsed) {
-      return Container(
-        width: 60,
-        color: Theme.of(context).appBarTheme.backgroundColor,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                  onPressed: () => setState(() {
-                        isCollapsed = !isCollapsed;
-                      }),
-                  icon: const Icon(Icons.menu)),
-            ),
-
-            //Empty Expanded Space
-            Expanded(child: SizedBox.fromSize()),
-
-            //Trailing icons
-            IconButton(
-                onPressed: () {}, icon: const Icon(Icons.create_new_folder)),
-            const SizedBox(height: 8),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-            const SizedBox(height: 8),
-            IconButton(
-                onPressed: () => context.goNamed(homePath,
-                    params: {homePath: indexToHomePath(index: 1)}),
-                icon: const Icon(Icons.settings)),
-            const SizedBox(height: 8),
-            const SizedBox(height: 5)
-          ],
-        ),
-      );
-    }
     return Container(
-        width: 300,
+        width: getSideBarWidth(context),
         color: Theme.of(context).appBarTheme.backgroundColor,
         child: Column(children: [
           //Title
-          Stack(
-            children: [
-              const LibraryTitleBlock(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                    onPressed: () => setState(() {
-                          isCollapsed = !isCollapsed;
-                        }),
-                    icon: const Icon(Icons.menu)),
-              ),
-            ],
-          ),
+          const LibraryTitleBlock(),
 
           //Empty Expanded Space
           Expanded(child: SizedBox.fromSize()),

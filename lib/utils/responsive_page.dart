@@ -1,6 +1,28 @@
 import 'package:flutter/widgets.dart';
 
-Widget buildResponsivePage(
+bool isMobile(BuildContext context) {
+  if (MediaQuery.of(context).size.width < 550) {
+    return true;
+  }
+  return false;
+}
+
+bool isTablet(BuildContext context) {
+  if (MediaQuery.of(context).size.width >= 550 &&
+      MediaQuery.of(context).size.width <= 1000) {
+    return true;
+  }
+  return false;
+}
+
+bool isDesktop(BuildContext context) {
+  if (MediaQuery.of(context).size.width > 1000) {
+    return true;
+  }
+  return false;
+}
+
+Widget buildResponsivePageTwoOptions(
     {required Widget mobileLayout, required Widget desktopLayout}) {
   return LayoutBuilder(builder: (context, constraints) {
     if (isMobile(context)) {
@@ -11,34 +33,27 @@ Widget buildResponsivePage(
   });
 }
 
-bool isMobile(BuildContext context) {
-  // ? Maybe Finetune Responsivness Later
-  var aspectRatio = (MediaQuery.of(context).size.width /
-      (MediaQuery.of(context).size.height));
-  if ((MediaQuery.of(context).size.width > 350) && (aspectRatio >= 0.65)) {
-    return false;
-  } else {
-    return true;
-  }
+Widget buildResponsivePageThreeOptions(
+    {required Widget mobileLayout,
+    required Widget tabletLayout,
+    required Widget desktopLayout}) {
+  return LayoutBuilder(builder: (context, constraints) {
+    if (isMobile(context)) {
+      return mobileLayout;
+    }
+    if (isTablet(context)) {
+      return tabletLayout;
+    }
+    return desktopLayout;
+  });
 }
 
-//determines if sidebars should automatically collapse
-bool shouldCollapse(BuildContext context, bool isCollapsed,
-    {bool userSetIsCollapsed = false}) {
-  if (userSetIsCollapsed && isCollapsed) {
-    return true;
-    /* }
-  if (!userSetIsCollapsed) {
-    return shouldAutoCollapse(context); */
-  } else {
-    return shouldAutoCollapse(context);
+// determines whether the width of the sidebars
+double getSideBarWidth(BuildContext context) {
+  double fixedWidth = 300;
+  double w = MediaQuery.of(context).size.width * 2 / 5;
+  if (w > fixedWidth) {
+    return fixedWidth;
   }
-}
-
-bool shouldAutoCollapse(BuildContext context) {
-  if (MediaQuery.of(context).size.width <= 750) {
-    return true;
-  } else {
-    return false;
-  }
+  return w;
 }

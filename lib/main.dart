@@ -1,12 +1,11 @@
 import 'dart:io';
-
+import 'package:window_manager/window_manager.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:window_size/window_size.dart';
 import 'package:writer/ui/settings/cubit/settings_cubit.dart';
 import 'package:writer/ui/library/cubit/library_cubit.dart';
 import 'router/main_routes.dart';
@@ -70,16 +69,19 @@ class SplashPage extends StatelessWidget {
     //set desktop window sizing
     if (!kIsWeb) {
       if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-        //window size package is a necessary evil
-        //it is not available on pub.dev but
-        //it prevents the window on desktop from becoming too small
-        //this would prevent users from making the window so small
-        //and prevent unbounded widget error in flutter
-        //can replace with another package...
-        //window_manager
-        setWindowTitle(stringAppName);
-        setWindowMinSize(const Size(300, 600));
-        setWindowMaxSize(Size.infinite);
+        //window_manager is in beta expect issues
+        await windowManager.ensureInitialized();
+
+        WindowOptions windowOptions = WindowOptions(
+          minimumSize: const Size(300, 600),
+          alwaysOnTop: isAlwaysOnTop(),
+          skipTaskbar: false,
+          title: stringAppName,
+        );
+        windowManager.waitUntilReadyToShow(windowOptions, () async {
+          await windowManager.show();
+          await windowManager.focus();
+        });
       }
     }
 
@@ -133,5 +135,13 @@ class SplashPage extends StatelessWidget {
                 ),
               ))));
     })));
+  }
+
+  //keeps the app always on top in debug mode
+  isAlwaysOnTop() {
+    if (kDebugMode) {
+      return true;
+    }
+    return false;
   }
 }

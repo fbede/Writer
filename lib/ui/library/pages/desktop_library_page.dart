@@ -10,7 +10,7 @@ class DesktopLibraryPage extends StatelessWidget {
         body: Row(
           children: [
             //Left Section
-            LibrarySideBar(isCollapsed: shouldCollapse(context, false)),
+            const LibrarySideBar(),
 
             const VerticalDivider(width: 2),
 
