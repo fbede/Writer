@@ -66,9 +66,7 @@ class _MobileLibraryPageState extends State<MobileLibraryPage> {
                     title: stringLibrary,
                     opacity: opacity,
                   ),
-                  const SliverToBoxAdapter(
-                    child: LibraryPageBody(),
-                  ),
+                  const LibraryPageBody(),
                 ],
               ),
             )));

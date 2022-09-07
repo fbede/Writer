@@ -5,7 +5,7 @@ import '../../utils/utils.dart';
 import '../settings/pages/desktop_settings_page.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key, int homeIndex = 0, settingsIndex = 0})
+  HomePage({Key? key, int homeIndex = 0, subRouteIndex = 0})
       : _key = key as Key,
         _homeIndex = homeIndex,
         mobileBody = MobileHomePage(
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         ),
         desktopBody = [
           const DesktopLibraryPage(),
-          DesktopAppSettingsPage(selectedIndex: settingsIndex)
+          DesktopAppSettingsPage(selectedIndex: subRouteIndex)
         ],
         super(key: key);
 

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:writer/ui/library/widgets/library_widgets.dart';
-import '../../../utils/utils.dart';
 
 class DesktopLibraryPage extends StatelessWidget {
-  const DesktopLibraryPage({Key? key}) : super(key: key);
+  const DesktopLibraryPage({Key? key, this.selectedIndex = 0})
+      : super(key: key);
+
+  final int selectedIndex;
+  final List<Widget> rightSection = const [
+    DesktopLibraryPageBody(),
+  ];
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -15,16 +20,10 @@ class DesktopLibraryPage extends StatelessWidget {
             const VerticalDivider(width: 2),
 
             //Right Section
-            //TODO: Add padding to the top & bottom of library page body
             Expanded(
-                child: Scaffold(
-              appBar: AppBar(automaticallyImplyLeading: false),
-              body: const Padding(
-                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                child: LibraryPageBody(
-                  shouldShrinkWrap: false,
-                ),
-              ),
+                child: IndexedStack(
+              index: selectedIndex,
+              children: rightSection,
             ))
           ],
         ),
