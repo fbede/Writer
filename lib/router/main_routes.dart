@@ -22,12 +22,23 @@ final mainAppRoutes = <GoRoute>[
 
 final homeSubRoutes = <GoRoute>[
   GoRoute(
-    path: ':$homePageSubPath',
-    name: homePageSubPath,
+      name: libraryPath,
+      path: ':$libraryPath',
+      builder: (context, state) => HomePage(
+            key: state.pageKey,
+            homeIndex: homePathToIndex(
+              string: state.params[homePath],
+            ),
+            subRouteIndex:
+                libraryPathToIndex(string: state.params[libraryPath]),
+          )),
+  GoRoute(
+    path: ':$settingsPath',
+    name: settingsPath,
     builder: (context, state) => HomePage(
       key: state.pageKey,
-      homeIndex: homePathToIndex(string: state.params[homePath]!),
-      subRouteIndex: settingsPathToIndex(string: state.params[homePageSubPath]),
+      homeIndex: homePathToIndex(string: state.params[homePath]),
+      subRouteIndex: settingsPathToIndex(string: state.params[settingsPath]),
     ),
     routes: [
       GoRoute(

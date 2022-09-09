@@ -35,15 +35,25 @@ class LibraryPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
-      sliver: SliverGrid(
+      sliver: buildGrid(context),
+    );
+  }
+
+  Widget buildGrid(BuildContext context) {
+    int itemCount = context.watch<LibraryCubit>().state.projectList.length;
+    if (itemCount <= 0) {
+      return const SliverToBoxAdapter(
+        child: SizedBox(),
+      );
+    } else {
+      return SliverGrid(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 150,
             mainAxisSpacing: 20,
             crossAxisSpacing: 20,
             childAspectRatio: 1 / 2),
-        delegate: SliverChildBuilderDelegate(
-            childCount: context.watch<LibraryCubit>().state.projectList.length,
-            (context, index) {
+        delegate:
+            SliverChildBuilderDelegate(childCount: itemCount, (context, index) {
           List<LibraryProject> projects =
               context.watch<LibraryCubit>().state.projectList;
           return _LibraryBookCard(
@@ -51,8 +61,8 @@ class LibraryPageBody extends StatelessWidget {
             index: index,
           );
         }),
-      ),
-    );
+      );
+    }
   }
 }
 

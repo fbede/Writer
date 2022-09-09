@@ -5,8 +5,8 @@ class ThemeModeConverter extends TypeConverter<ThemeMode, int> {
   const ThemeModeConverter();
 
   @override
-  ThemeMode fromIsar(int themeModeIndex) {
-    switch (themeModeIndex) {
+  ThemeMode fromIsar(int object) {
+    switch (object) {
       case 0:
         return ThemeMode.dark;
       case 1:
@@ -19,8 +19,8 @@ class ThemeModeConverter extends TypeConverter<ThemeMode, int> {
   }
 
   @override
-  int toIsar(ThemeMode themeMode) {
-    switch (themeMode) {
+  int toIsar(ThemeMode object) {
+    switch (object) {
       case ThemeMode.dark:
         return 0;
       case ThemeMode.light:

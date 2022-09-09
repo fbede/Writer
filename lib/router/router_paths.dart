@@ -2,12 +2,15 @@
 const String homePath = 'home';
 const String libraryPath = 'library';
 const String settingsPath = 'settings';
-const String homePageSubPath = 'homePageSubPath';
 
 //settings paths
 const String selectThemePath = 'selectTheme';
 const String aboutAppPath = 'aboutApp';
 const String licensesPagePath = 'licensesPage';
+
+//library paths
+const String createEditBookPath = 'createEditBook';
+const String createEditSeriesPath = 'createEditSeries';
 
 //unused paths
 const String notesPath = 'notes';

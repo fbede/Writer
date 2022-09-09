@@ -42,7 +42,7 @@ class AboutAppPageBody extends StatelessWidget {
             //Implement router navigation after designing desktop page
             onPressed: () => context.pushNamed(licensesPagePath, params: {
                   homePath: indexToHomePath(index: 1),
-                  homePageSubPath: indexToSettingsPath(index: 1)
+                  settingsPath: indexToSettingsPath(index: 1)
                 }),
             child: const Text(stringViewLicenses))
       ],

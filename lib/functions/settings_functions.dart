@@ -43,13 +43,13 @@ handleTap(BuildContext context, int index) {
     } else {
       context.pushNamed(aboutAppPath, params: {
         homePath: indexToHomePath(index: 1),
-        homePageSubPath: indexToSettingsPath(index: index)
+        settingsPath: indexToSettingsPath(index: index)
       });
     }
   } else {
-    context.goNamed(homePageSubPath, params: {
+    context.goNamed(settingsPath, params: {
       homePath: indexToHomePath(index: 1),
-      homePageSubPath: indexToSettingsPath(index: index)
+      settingsPath: indexToSettingsPath(index: index)
     });
   }
 }

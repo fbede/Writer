@@ -37,9 +37,9 @@ class LibrarySideBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
-            onTap: () => context.goNamed(homePageSubPath, params: {
+            onTap: () => context.goNamed(settingsPath, params: {
               homePath: indexToHomePath(index: 1),
-              homePageSubPath: indexToSettingsPath(index: 1)
+              settingsPath: indexToSettingsPath(index: 1)
             }),
             onLongPress: () {},
           ),
