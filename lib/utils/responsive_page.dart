@@ -51,7 +51,7 @@ Widget buildResponsivePageThreeOptions(
 // determines whether the width of the sidebars
 double getSideBarWidth(BuildContext context) {
   double fixedWidth = 300;
-  double w = MediaQuery.of(context).size.width * 2 / 5;
+  double w = MediaQuery.of(context).size.width * 0.45;
   if (w > fixedWidth) {
     return fixedWidth;
   }

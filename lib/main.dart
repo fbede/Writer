@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:writer/ui/settings/cubit/settings_cubit.dart';
-import 'package:writer/ui/library/cubit/library_cubit.dart';
+import 'cubits/cubits.dart';
 import 'router/main_routes.dart';
 import 'utils/utils.dart';
 
@@ -15,7 +14,6 @@ import 'utils/utils.dart';
 // TODO 3: Add OnboardingScreen
 // TODO 4: Add LoginScreen
 // TODO 5: Add TutorialScreen
-//yo
 
 void main() {
   GoRouter.setUrlPathStrategy(UrlPathStrategy.path);

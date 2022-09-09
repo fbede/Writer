@@ -1,7 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:writer/ui/settings/pages/about_us_page.dart';
-import 'package:writer/ui/settings/pages/licenses_page.dart';
-import '../ui/home/home_page.dart';
+import '../pages/pages.dart';
 import 'router_functions.dart';
 import 'router_paths.dart';
 
@@ -10,6 +8,8 @@ final mainAppRoutes = <GoRoute>[
     path: '/',
     redirect: (_) => '/$libraryPath',
   ),
+
+  //used mainly by mobile so that nested navigation works
   GoRoute(
       name: homePath,
       path: '/:$homePath',
@@ -17,26 +17,17 @@ final mainAppRoutes = <GoRoute>[
             key: state.pageKey,
             homeIndex: homePathToIndex(string: state.params[homePath]!),
           ),
-      routes: settingsLibrarySubRoutes),
+      routes: homeSubRoutes),
 ];
 
-final settingsLibrarySubRoutes = <GoRoute>[
+final homeSubRoutes = <GoRoute>[
   GoRoute(
-    path: ':$libraryPath',
-    name: libraryPath,
+    path: ':$homePageSubPath',
+    name: homePageSubPath,
     builder: (context, state) => HomePage(
       key: state.pageKey,
       homeIndex: homePathToIndex(string: state.params[homePath]!),
-      subRouteIndex: settingsPathToIndex(string: state.params[settingsPath]),
-    ),
-  ),
-  GoRoute(
-    path: ':$settingsPath',
-    name: settingsPath,
-    builder: (context, state) => HomePage(
-      key: state.pageKey,
-      homeIndex: 1, // homePathToIndex(string: state.params[homePath]!),
-      subRouteIndex: settingsPathToIndex(string: state.params[settingsPath]),
+      subRouteIndex: settingsPathToIndex(string: state.params[homePageSubPath]),
     ),
     routes: [
       GoRoute(
