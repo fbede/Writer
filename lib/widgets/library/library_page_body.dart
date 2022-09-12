@@ -33,35 +33,30 @@ class LibraryPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
-      sliver: buildGrid(context),
-    );
-  }
-
-  Widget buildGrid(BuildContext context) {
     int itemCount = context.watch<LibraryCubit>().state.projectList.length;
     if (itemCount <= 0) {
       return const SliverToBoxAdapter(
         child: SizedBox(),
       );
     } else {
-      return SliverGrid(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 150,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 1 / 2),
-        delegate:
-            SliverChildBuilderDelegate(childCount: itemCount, (context, index) {
-          List<LibraryProject> projects =
-              context.watch<LibraryCubit>().state.projectList;
-          return _LibraryBookCard(
-            projects: projects,
-            index: index,
-          );
-        }),
-      );
+      return SliverPadding(
+          padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                childAspectRatio: 1 / 2),
+            delegate: SliverChildBuilderDelegate(childCount: itemCount,
+                (context, index) {
+              List<LibraryProject> projects =
+                  context.watch<LibraryCubit>().state.projectList;
+              return _LibraryBookCard(
+                projects: projects,
+                index: index,
+              );
+            }),
+          ));
     }
   }
 }
@@ -119,10 +114,10 @@ class _LibraryBookCard extends StatelessWidget {
       return project.coverPhoto;
     }
     if (project is LibraryBook) {
-      return const Icon(Icons.class_);
+      return const Icon(bookIcon);
     }
     if (project is LibrarySeries) {
-      return const Icon(Icons.folder);
+      return const Icon(folderIcon);
     }
   }
 }
@@ -137,7 +132,7 @@ class _LibraryPopUpMenuButton extends StatelessWidget {
     return PositionedDirectional(
       end: -15,
       child: PopupMenuButton(
-          icon: const Icon(Icons.more_vert),
+          icon: const Icon(optionsMenuIcon),
           itemBuilder: (BuildContext context) {
             final List<PopupMenuItem> homePageMenuItems = [
               PopupMenuItem(

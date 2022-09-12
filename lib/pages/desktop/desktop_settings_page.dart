@@ -3,8 +3,8 @@ import '../../functions/settings_functions.dart';
 import '../../widgets/widgets.dart';
 import '../pages.dart';
 
-class TabletAppSettingsPage extends StatelessWidget {
-  const TabletAppSettingsPage({Key? key, this.selectedIndex = 1})
+class DesktopAppSettingsPage extends StatelessWidget {
+  const DesktopAppSettingsPage({Key? key, this.selectedIndex = 1})
       : super(key: key);
 
   final int selectedIndex;

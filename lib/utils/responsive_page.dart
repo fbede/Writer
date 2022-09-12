@@ -23,12 +23,12 @@ bool isDesktop(BuildContext context) {
 }
 
 Widget buildResponsivePageTwoOptions(
-    {required Widget mobileLayout, required Widget tabletLayout}) {
+    {required Widget mobileLayout, required Widget desktopLayout}) {
   return LayoutBuilder(builder: (context, constraints) {
     if (isMobile(context)) {
       return mobileLayout;
     } else {
-      return tabletLayout;
+      return desktopLayout;
     }
   });
 }

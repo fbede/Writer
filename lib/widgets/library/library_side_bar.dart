@@ -17,25 +17,40 @@ class LibrarySideBar extends StatelessWidget {
         color: Theme.of(context).appBarTheme.backgroundColor,
         child: Column(children: [
           //Title
-          const LibraryTitleBlock(),
+          InkWell(
+              mouseCursor: MouseCursor.defer,
+              onTap: () => context.goNamed(libraryPath, params: {
+                    homePath: indexToHomePath(index: 0),
+                    libraryPath: indexToLibraryPath(index: 0)
+                  }),
+              child: const LibraryTitleBlock()),
 
           //Empty Expanded Space
-          Expanded(child: SizedBox.fromSize()),
+          Expanded(
+            child: InkWell(
+              mouseCursor: MouseCursor.defer,
+              onTap: () => context.goNamed(libraryPath, params: {
+                homePath: indexToHomePath(index: 0),
+                libraryPath: indexToLibraryPath(index: 0)
+              }),
+              child: const SizedBox.expand(),
+            ),
+          ),
 
           ListTile(
-            leading: const Icon(Icons.create_new_folder),
+            leading: const Icon(newFolderIcon),
             title: const Text('Create New Series'),
             onTap: () {},
             onLongPress: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.add),
+            leading: const Icon(plusOpenIcon),
             title: const Text('Create New Book'),
             onTap: () {},
             onLongPress: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
+            leading: const Icon(activeSettingsIcon),
             title: const Text('Settings'),
             onTap: () => context.goNamed(settingsPath, params: {
               homePath: indexToHomePath(index: 1),

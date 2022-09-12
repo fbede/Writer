@@ -32,7 +32,7 @@ class MobileSettingsBody extends StatelessWidget {
         ListTile(
           selected: index == 2,
           leading: const Icon(
-            Icons.info,
+            infoIcon,
           ),
           title: const Text(stringAboutApp),
           subtitle: const Text(stringAppVersion),

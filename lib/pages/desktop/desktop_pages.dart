@@ -1,1 +1,2 @@
-//These are reserved for pages that are for extra large screens
+export 'desktop_library_page.dart';
+export 'desktop_settings_page.dart';

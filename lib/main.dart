@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'cubits/cubits.dart';
 import 'router/main_routes.dart';
 import 'utils/utils.dart';
+import 'package:flutter/services.dart';
 
 // TODO 2: Maybe Add LanguageScreen
 // TODO 3: Add OnboardingScreen
@@ -64,6 +65,10 @@ class SplashPage extends StatelessWidget {
 
   Future<Widget> futureCall() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    //locks app to portrait
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     //set desktop window sizing
     if (!kIsWeb) {

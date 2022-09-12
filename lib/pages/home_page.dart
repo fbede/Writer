@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         ],
         tabletBody = [
           const TabletLibraryPage(),
-          TabletAppSettingsPage(selectedIndex: subRouteIndex)
+          DesktopAppSettingsPage(selectedIndex: subRouteIndex)
         ],
         super(key: key);
 
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return buildResponsivePageTwoOptions(
       mobileLayout: mobileBody[_subRouteIndex],
-      tabletLayout: tabletBody[_homeIndex],
+      desktopLayout: tabletBody[_homeIndex],
     );
   }
 }

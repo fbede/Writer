@@ -26,9 +26,7 @@ final homeSubRoutes = <GoRoute>[
       path: ':$libraryPath',
       builder: (context, state) => HomePage(
             key: state.pageKey,
-            homeIndex: homePathToIndex(
-              string: state.params[homePath],
-            ),
+            homeIndex: homePathToIndex(string: state.params[homePath]),
             subRouteIndex:
                 libraryPathToIndex(string: state.params[libraryPath]),
           )),

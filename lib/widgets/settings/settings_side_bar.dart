@@ -34,7 +34,7 @@ class SettingsSideBar extends StatelessWidget {
           ),
 
           ListTile(
-            leading: const Icon(Icons.class_),
+            leading: const Icon(activeBookIcon),
             title: const Text(stringLibrary),
             onTap: () => context.goNamed(homePath,
                 params: {homePath: indexToHomePath(index: 0)}),

@@ -21,11 +21,11 @@ Text getThemeSubtitle({required BuildContext context}) {
 Icon getThemeIcon({required BuildContext context}) {
   switch (context.watch<SettingsCubit>().state.themeMode) {
     case ThemeMode.dark:
-      return const Icon(Icons.dark_mode);
+      return const Icon(darkModeIcon);
     case ThemeMode.light:
-      return const Icon(Icons.light_mode);
+      return const Icon(lightModeIcon);
     case ThemeMode.system:
-      return const Icon(Icons.computer);
+      return const Icon(systemThemeModeIcon);
   }
 }
 
