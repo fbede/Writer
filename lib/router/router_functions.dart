@@ -43,3 +43,25 @@ String indexToSettingsPath({required int index}) {
       return '';
   }
 }
+
+int libraryPathToIndex({String? string}) {
+  switch (string) {
+    case createEditBookPath:
+      return 1;
+    case createEditSeriesPath:
+      return 2;
+    default:
+      return 0;
+  }
+}
+
+String indexToLibraryPath({required int index}) {
+  switch (index) {
+    case 1:
+      return createEditBookPath;
+    case 2:
+      return createEditSeriesPath;
+    default:
+      return '';
+  }
+}

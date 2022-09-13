@@ -1,8 +1,13 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:writer/functions/ui_functions.dart';
+import 'package:writer/router/router.dart';
+
 import 'package:writer/utils/utils.dart';
 import '../../cubits/cubits.dart';
 import '../../widgets/widgets.dart';
@@ -95,14 +100,20 @@ class _LibrarySpeedDial extends StatelessWidget {
             child: folderIcon,
             label: stringCreateNewSeries,
             onLongPress: () {},
-            onTap: () => context.read<LibraryCubit>().createNewSeries()),
+            onTap: () => context.pushNamed(libraryPath, params: {
+                  homePath: indexToHomePath(index: 0),
+                  libraryPath: indexToLibraryPath(index: 2)
+                })),
         SpeedDialChild(
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
             child: bookIcon,
             label: stringCreateNewBook,
             onLongPress: () {},
-            onTap: () => context.read<LibraryCubit>().createNewBook())
+            onTap: () => context.pushNamed(libraryPath, params: {
+                  homePath: indexToHomePath(index: 0),
+                  libraryPath: indexToLibraryPath(index: 1)
+                }))
       ],
     );
   }

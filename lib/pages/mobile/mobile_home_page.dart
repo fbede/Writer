@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:writer/utils/utils.dart';
 import '../../router/router.dart';
-import '../../utils/strings.dart';
 import 'mobile_library_page.dart';
 import 'mobile_settings_page.dart';
 

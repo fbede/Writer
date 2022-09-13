@@ -33,26 +33,31 @@ class LibraryPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
-      sliver: SliverGrid(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 150,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 1 / 2),
-        delegate: SliverChildBuilderDelegate(
-            childCount: context.watch<LibraryCubit>().state.projectList.length,
-            (context, index) {
-          List<LibraryProject> projects =
-              context.watch<LibraryCubit>().state.projectList;
-          return _LibraryBookCard(
-            projects: projects,
-            index: index,
-          );
-        }),
-      ),
-    );
+    int itemCount = context.watch<LibraryCubit>().state.projectList.length;
+    if (itemCount <= 0) {
+      return const SliverToBoxAdapter(
+        child: SizedBox(),
+      );
+    } else {
+      return SliverPadding(
+          padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                childAspectRatio: 1 / 2),
+            delegate: SliverChildBuilderDelegate(childCount: itemCount,
+                (context, index) {
+              List<LibraryProject> projects =
+                  context.watch<LibraryCubit>().state.projectList;
+              return _LibraryBookCard(
+                projects: projects,
+                index: index,
+              );
+            }),
+          ));
+    }
   }
 }
 
