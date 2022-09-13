@@ -69,39 +69,23 @@ class LibrarySideBar extends StatelessWidget {
           ),
 
           ListTile(
-<<<<<<<< HEAD:lib/pages/desktop/desktop_library_page.dart
             leading: createNewIconFolder,
-========
-            leading: const Icon(newFolderIcon),
->>>>>>>> a5a67d0e99019030ba4222a5784d39ad57ed7852:lib/widgets/library/library_side_bar.dart
             title: const Text('Create New Series'),
             onTap: () {},
             onLongPress: () {},
           ),
           ListTile(
-<<<<<<<< HEAD:lib/pages/desktop/desktop_library_page.dart
             leading: addCreateIcon,
-========
-            leading: const Icon(plusOpenIcon),
->>>>>>>> a5a67d0e99019030ba4222a5784d39ad57ed7852:lib/widgets/library/library_side_bar.dart
             title: const Text('Create New Book'),
             onTap: () {},
             onLongPress: () {},
           ),
           ListTile(
-<<<<<<<< HEAD:lib/pages/desktop/desktop_library_page.dart
             leading: settingsIcon,
             title: const Text('Settings'),
             onTap: () => context.goNamed(homeSubPath, params: {
               homePath: indexToHomePath(index: 1),
               homeSubPath: indexToSettingsPath(index: 1)
-========
-            leading: const Icon(activeSettingsIcon),
-            title: const Text('Settings'),
-            onTap: () => context.goNamed(settingsPath, params: {
-              homePath: indexToHomePath(index: 1),
-              settingsPath: indexToSettingsPath(index: 1)
->>>>>>>> a5a67d0e99019030ba4222a5784d39ad57ed7852:lib/widgets/library/library_side_bar.dart
             }),
             onLongPress: () {},
           ),
