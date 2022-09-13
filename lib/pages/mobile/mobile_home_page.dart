@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:writer/utils/utils.dart';
 import '../../router/router.dart';
 import '../../utils/strings.dart';
 import 'mobile_library_page.dart';
@@ -54,13 +55,14 @@ class _MobileHomePageState extends State<MobileHomePage> {
               .goNamed(homePath, params: {homePath: indexToHomePath(index: i)}),
           destinations: const [
             NavigationDestination(
-                icon: Icon(Icons.class_outlined),
-                label: stringLibrary,
-                selectedIcon: Icon(Icons.class_)),
+              icon: outlinedBookIcon,
+              label: stringLibrary,
+              selectedIcon: bookIcon,
+            ),
             NavigationDestination(
-              icon: Icon(Icons.settings_outlined),
+              icon: outlinedSettingsIcon,
               label: stringSettings,
-              selectedIcon: Icon(Icons.settings),
+              selectedIcon: settingsIcon,
             ),
           ]),
     );

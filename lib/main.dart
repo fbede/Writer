@@ -94,46 +94,51 @@ class SplashPage extends StatelessWidget {
 
     //starts actual app
     //displays splashscreen for 4 seconds
-    return Future.delayed(const Duration(seconds: 4), ((() {
-      //add necessary comments here
-      return Builder(
+    return Future.delayed(
+      const Duration(seconds: 4),
+      ((() {
+        //add necessary comments here
+        return Builder(
           //This makes keyboards on touchscreen devices to automatically close
           builder: ((context) => GestureDetector(
-              onTap: () {},
-              child: TooltipVisibility(
-                visible: false,
-                child: MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => LibraryCubit(),
-                    ),
-                    BlocProvider(
-                      create: (context) => SettingsCubit(prefs: prefs),
-                    ),
-                    /* BlocProvider(
+                onTap: () {},
+                child: TooltipVisibility(
+                  visible: false,
+                  child: MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => LibraryCubit(),
+                      ),
+                      BlocProvider(
+                        create: (context) => SettingsCubit(prefs: prefs),
+                      ),
+                      /* BlocProvider(
                       create: (context) => TextOpacityCubit(),
                     ) */
-                  ],
-                  child: Builder(
-                    builder: (context) {
-                      //returns actual app
-                      return MaterialApp.router(
-                        title: 'Flutter Demo',
-                        themeMode:
-                            context.watch<SettingsCubit>().state.themeMode,
-                        theme: lightThemeData,
-                        darkTheme: darkThemeData,
-                        routeInformationProvider:
-                            router.routeInformationProvider,
-                        routeInformationParser: router.routeInformationParser,
-                        routerDelegate: router.routerDelegate,
-                        debugShowCheckedModeBanner: false,
-                      );
-                    },
+                    ],
+                    child: Builder(
+                      builder: (context) {
+                        //returns actual app
+                        return MaterialApp.router(
+                          title: 'Flutter Demo',
+                          themeMode:
+                              context.watch<SettingsCubit>().state.themeMode,
+                          theme: lightThemeData,
+                          darkTheme: darkThemeData,
+                          routeInformationProvider:
+                              router.routeInformationProvider,
+                          routeInformationParser: router.routeInformationParser,
+                          routerDelegate: router.routerDelegate,
+                          debugShowCheckedModeBanner: false,
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ))));
-    })));
+              )),
+        );
+      })),
+    );
   }
 
   //keeps the app always on top in debug mode

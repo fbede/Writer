@@ -11,8 +11,8 @@ class HomePage extends StatelessWidget {
           index: homeIndex,
         ),
         desktopBody = [
-          const TabletLibraryPage(),
-          TabletAppSettingsPage(selectedIndex: subRouteIndex)
+          const DesktopLibraryPage(),
+          DesktopAppSettingsPage(selectedIndex: subRouteIndex)
         ],
         super(key: key);
 

@@ -21,11 +21,11 @@ Text getThemeSubtitle({required BuildContext context}) {
 Icon getThemeIcon({required BuildContext context}) {
   switch (context.watch<SettingsCubit>().state.themeMode) {
     case ThemeMode.dark:
-      return const Icon(Icons.dark_mode);
+      return darkModeIcon;
     case ThemeMode.light:
-      return const Icon(Icons.light_mode);
+      return lightModeIcon;
     case ThemeMode.system:
-      return const Icon(Icons.computer);
+      return systemThemeModeIcon;
   }
 }
 
@@ -43,13 +43,13 @@ handleTap(BuildContext context, int index) {
     } else {
       context.pushNamed(aboutAppPath, params: {
         homePath: indexToHomePath(index: 1),
-        homePageSubPath: indexToSettingsPath(index: index)
+        homeSubPath: indexToSettingsPath(index: index)
       });
     }
   } else {
-    context.goNamed(homePageSubPath, params: {
+    context.goNamed(homeSubPath, params: {
       homePath: indexToHomePath(index: 1),
-      homePageSubPath: indexToSettingsPath(index: index)
+      homeSubPath: indexToSettingsPath(index: index)
     });
   }
 }

@@ -4,8 +4,8 @@ import '../../../utils/utils.dart';
 import '../../cubits/cubits.dart';
 import '../../models/models.dart';
 
-class TabletLibraryPageBody extends StatelessWidget {
-  const TabletLibraryPageBody({
+class DesktopLibraryPageBody extends StatelessWidget {
+  const DesktopLibraryPageBody({
     Key? key,
   }) : super(key: key);
 
@@ -109,10 +109,10 @@ class _LibraryBookCard extends StatelessWidget {
       return project.coverPhoto;
     }
     if (project is LibraryBook) {
-      return const Icon(Icons.class_);
+      return bookIcon;
     }
     if (project is LibrarySeries) {
-      return const Icon(Icons.folder);
+      return folderIcon;
     }
   }
 }
@@ -127,7 +127,7 @@ class _LibraryPopUpMenuButton extends StatelessWidget {
     return PositionedDirectional(
       end: -15,
       child: PopupMenuButton(
-          icon: const Icon(Icons.more_vert),
+          icon: optionsMenuIcon,
           itemBuilder: (BuildContext context) {
             final List<PopupMenuItem> homePageMenuItems = [
               PopupMenuItem(

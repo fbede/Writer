@@ -2,7 +2,7 @@
 const String homePath = 'home';
 const String libraryPath = 'library';
 const String settingsPath = 'settings';
-const String homePageSubPath = 'homePageSubPath';
+const String homeSubPath = 'homePageSubPath';
 
 //settings paths
 const String selectThemePath = 'selectTheme';

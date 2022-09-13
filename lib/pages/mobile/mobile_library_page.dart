@@ -1,13 +1,12 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-
 import 'package:writer/functions/ui_functions.dart';
-
 import 'package:writer/utils/utils.dart';
-
 import '../../cubits/cubits.dart';
 import '../../widgets/widgets.dart';
+import '../pages.dart';
 
 class MobileLibraryPage extends StatefulWidget {
   const MobileLibraryPage({
@@ -78,11 +77,13 @@ class _LibrarySpeedDial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
+      animationAngle: pi * 3 / 4,
       backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-      icon: Icons.add,
+      icon: addCreateIconData,
+      iconTheme: const IconThemeData(size: 35),
       overlayOpacity: 0,
-      activeIcon: Icons.close,
+      activeIcon: addCreateIconData,
       spacing: 16,
       spaceBetweenChildren: 12,
       shape: const RoundedRectangleBorder(
@@ -91,14 +92,14 @@ class _LibrarySpeedDial extends StatelessWidget {
         SpeedDialChild(
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-            child: const Icon(Icons.folder),
+            child: folderIcon,
             label: stringCreateNewSeries,
             onLongPress: () {},
             onTap: () => context.read<LibraryCubit>().createNewSeries()),
         SpeedDialChild(
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-            child: const Icon(Icons.class_),
+            child: bookIcon,
             label: stringCreateNewBook,
             onLongPress: () {},
             onTap: () => context.read<LibraryCubit>().createNewBook())

@@ -22,7 +22,7 @@ String indexToHomePath({required int index}) {
   }
 }
 
-int settingsPathToIndex({String? string}) {
+int homeSubPathToIndex({String? string}) {
   switch (string) {
     case selectThemePath:
       return 1;

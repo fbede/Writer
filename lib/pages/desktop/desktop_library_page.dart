@@ -4,6 +4,37 @@ import 'package:go_router/go_router.dart';
 import '../../../../utils/utils.dart';
 import '../../../router/router.dart';
 import '../../cubits/cubits.dart';
+import '../../widgets/widgets.dart';
+
+class DesktopLibraryPage extends StatelessWidget {
+  const DesktopLibraryPage({Key? key, this.selectedIndex = 0})
+      : super(key: key);
+
+  final int selectedIndex;
+  final List<Widget> rightSection = const [
+    DesktopLibraryPageBody(),
+  ];
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Row(
+          children: [
+            //Left Section
+            const LibrarySideBar(),
+
+            const VerticalDivider(width: 2),
+
+            //Right Section
+            Expanded(
+              child: IndexedStack(
+                index: selectedIndex,
+                children: rightSection,
+              ),
+            )
+          ],
+        ),
+      );
+}
 
 class LibrarySideBar extends StatelessWidget {
   const LibrarySideBar({
@@ -23,23 +54,23 @@ class LibrarySideBar extends StatelessWidget {
           Expanded(child: SizedBox.fromSize()),
 
           ListTile(
-            leading: const Icon(Icons.create_new_folder),
+            leading: createNewIconFolder,
             title: const Text('Create New Series'),
             onTap: () {},
             onLongPress: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.add),
+            leading: addCreateIcon,
             title: const Text('Create New Book'),
             onTap: () {},
             onLongPress: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
+            leading: settingsIcon,
             title: const Text('Settings'),
-            onTap: () => context.goNamed(homePageSubPath, params: {
+            onTap: () => context.goNamed(homeSubPath, params: {
               homePath: indexToHomePath(index: 1),
-              homePageSubPath: indexToSettingsPath(index: 1)
+              homeSubPath: indexToSettingsPath(index: 1)
             }),
             onLongPress: () {},
           ),
