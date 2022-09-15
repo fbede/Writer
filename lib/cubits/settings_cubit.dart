@@ -4,23 +4,36 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:writer/type_converters/theme_mode_converters.dart';
+import 'package:writer/cubits/cubits.dart';
+import 'package:writer/services/services.dart';
+
+import '../type_converters/type_converters.dart';
 
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  SettingsCubit({required this.prefs}) : super(SettingsInitial(prefs: prefs));
-  final SharedPreferences prefs;
-  final String stringThemeMode = 'themeMode';
-  final intGen = Random();
+  SettingsCubit({
+    required SharedPreferences prefs,
+  })  : _settingsService = SettingsService(preferences: prefs),
+        super(
+          SettingsInitial(prefs: prefs),
+        );
 
-  changeThemeMode({required ThemeMode themeMode}) async {
-    await prefs.setInt(stringThemeMode, themeModeToPrefs(themeMode));
-    emit(state.copyWith(themeMode: themeMode, randomInt: intGen.nextInt(999)));
+  //final SharedPreferences _prefs;
+  final SettingsService _settingsService;
+
+  changeThemeMode({
+    required ThemeMode themeMode,
+  }) {
+    _settingsService.changeThemeMode(themeMode);
+    emit(
+      state.copyWith(themeMode: themeMode),
+    );
   }
 
   getThemeMode() {
-    ThemeMode themeMode = themeModeFromPrefs(prefs.getInt(stringThemeMode));
-    emit(state.copyWith(themeMode: themeMode));
+    emit(state.copyWith(
+      themeMode: _settingsService.getThemeMode(),
+    ));
   }
 }

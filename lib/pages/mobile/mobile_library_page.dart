@@ -95,25 +95,31 @@ class _LibrarySpeedDial extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15))),
       children: [
         SpeedDialChild(
-            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-            foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-            child: folderIcon,
-            label: stringCreateNewSeries,
-            onLongPress: () {},
-            onTap: () => context.pushNamed(libraryPath, params: {
-                  homePath: indexToHomePath(index: 0),
-                  libraryPath: indexToLibraryPath(index: 2)
-                })),
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+          child: folderIcon,
+          label: stringCreateNewSeries,
+          onLongPress: () {},
+          onTap: () => context
+              .read<LibraryCubit>()
+              .createNewSeries(), /* context.pushNamed(homeSubPath, params: {
+            homePath: indexToHomePath(index: 0),
+            homeSubPath: indexToLibraryPath(index: 2)
+          }), */
+        ),
         SpeedDialChild(
-            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-            foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-            child: bookIcon,
-            label: stringCreateNewBook,
-            onLongPress: () {},
-            onTap: () => context.pushNamed(libraryPath, params: {
-                  homePath: indexToHomePath(index: 0),
-                  libraryPath: indexToLibraryPath(index: 1)
-                }))
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+          child: bookIcon,
+          label: stringCreateNewBook,
+          onLongPress: () {},
+          onTap: () => context
+              .read<LibraryCubit>()
+              .createNewBook(), /* context.pushNamed(homeSubPath, params: {
+            homePath: indexToHomePath(index: 0),
+            homeSubPath: indexToLibraryPath(index: 1)
+          }), */
+        )
       ],
     );
   }

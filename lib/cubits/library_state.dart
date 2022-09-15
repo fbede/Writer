@@ -1,50 +1,47 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'library_cubit.dart';
 
 class LibraryState extends Equatable {
   const LibraryState({
     required this.projectList,
-    /* required this.bookList,
-      required this.seriesList */
+    required this.bookNum,
+    required this.seriesNum,
+    required this.projectNum,
   });
 
   final List<LibraryProject> projectList;
-  /* final List<LibraryBook> bookList;
-  final List<LibraryProject> seriesList; */
-
-  int get projectNum => projectList.length;
-  int get bookNum {
-    int book = 0;
-    for (var project in projectList) {
-      if (project is LibraryBook) {
-        book++;
-      }
-    }
-    return book;
-  }
-
-  int get seriesNum {
-    int series = 0;
-    for (var project in projectList) {
-      if (project is LibrarySeries) {
-        series++;
-      }
-    }
-    return series;
-  }
+  final int projectNum;
+  final int bookNum;
+  final int seriesNum;
 
   @override
-  List<Object> get props => [projectList];
+  List<Object> get props => [
+        projectList,
+        projectNum,
+        bookNum,
+        seriesNum,
+      ];
 
   LibraryState copyWith({
     List<LibraryProject>? projectList,
+    int? projectNum,
+    int? bookNum,
+    int? seriesNum,
   }) {
     return LibraryState(
       projectList: projectList ?? this.projectList,
+      bookNum: bookNum ?? this.bookNum,
+      projectNum: projectNum ?? this.projectNum,
+      seriesNum: seriesNum ?? this.seriesNum,
     );
   }
 }
 
 class LibraryStateInitial extends LibraryState {
-  const LibraryStateInitial() : super(projectList: const []);
+  LibraryStateInitial()
+      : super(
+          projectList: LibraryService().projectList,
+          bookNum: LibraryService().bookNum,
+          seriesNum: LibraryService().seriesNum,
+          projectNum: LibraryService().projectNum,
+        );
 }

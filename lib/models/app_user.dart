@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
-import '../type_converters/type_converters.dart';
-
 @Collection()
 class AppUser {
   @Id()
@@ -18,7 +16,7 @@ class AppSettings {
   @Id()
   int? settingsId = Isar.autoIncrement;
 
-  @ThemeModeConverter()
+  //@ThemeModeConverter()
   @Name('ThemeMode')
   late ThemeMode? themeModeSettings;
 }
