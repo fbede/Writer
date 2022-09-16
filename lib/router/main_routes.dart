@@ -6,7 +6,10 @@ import 'router_paths.dart';
 final mainAppRoutes = <GoRoute>[
   GoRoute(
     path: '/',
-    redirect: (_) => '/$libraryPath',
+    redirect: (state) => state.namedLocation(homeSubPath, params: {
+      homePath: indexToHomePath(index: 0),
+      homeSubPath: indexToLibraryPath(index: 0)
+    }),
   ),
 
   //used mainly by mobile so that nested navigation works

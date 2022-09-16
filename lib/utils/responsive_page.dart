@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 bool isMobile(BuildContext context) {
-  if (MediaQuery.of(context).size.width < 550) {
+  if (MediaQuery.of(context).size.width < 550 ||
+      MediaQuery.of(context).size.height < 450) {
     return true;
   }
   return false;

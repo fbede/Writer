@@ -24,10 +24,20 @@ String indexToHomePath({required int index}) {
 
 int homeSubPathToIndex({String? string}) {
   switch (string) {
+
+    //libraryPaths
+    case createEditBookPath:
+      return 1;
+    case createEditSeriesPath:
+      return 2;
+
+    //settingsPaths
     case selectThemePath:
       return 1;
     case aboutAppPath:
       return 2;
+
+    //default
     default:
       return 0;
   }
@@ -41,17 +51,6 @@ String indexToSettingsPath({required int index}) {
       return aboutAppPath;
     default:
       return '';
-  }
-}
-
-int libraryPathToIndex({String? string}) {
-  switch (string) {
-    case createEditBookPath:
-      return 1;
-    case createEditSeriesPath:
-      return 2;
-    default:
-      return 0;
   }
 }
 

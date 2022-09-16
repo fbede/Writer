@@ -1,13 +1,9 @@
 import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:writer/cubits/cubits.dart';
 import 'package:writer/services/services.dart';
-
-import '../type_converters/type_converters.dart';
 
 part 'settings_state.dart';
 
