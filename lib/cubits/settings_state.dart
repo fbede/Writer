@@ -28,9 +28,9 @@ class SettingsInitial extends SettingsState {
   }) : super(themeMode: themeMode);
 
   factory SettingsInitial({
-    required SharedPreferences prefs,
+    required SettingsService service,
   }) {
-    final settingsService = SettingsService(preferences: prefs);
+    final SettingsService settingsService = service;
 
     return SettingsInitial._(
       themeMode: settingsService.getThemeMode(),

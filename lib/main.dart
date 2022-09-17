@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'cubits/cubits.dart';
 import 'router/main_routes.dart';
+import 'services/services.dart';
 import 'utils/utils.dart';
 import 'package:flutter/services.dart';
 
@@ -89,16 +90,14 @@ class SplashPage extends StatelessWidget {
       }
     }
 
-    //gets SharedPreferences
-    final prefs = await SharedPreferences.getInstance();
-
     //initialize router
     final GoRouter router = GoRouter(
       routes: mainAppRoutes,
     );
 
     //starts services
-    //SettingsService();
+    final settingsService =
+        SettingsService(preferences: await SharedPreferences.getInstance());
 
     //starts actual app
     //displays splashscreen for 4 seconds
@@ -118,7 +117,8 @@ class SplashPage extends StatelessWidget {
                         create: (context) => LibraryCubit(),
                       ),
                       BlocProvider(
-                        create: (context) => SettingsCubit(prefs: prefs),
+                        create: (context) =>
+                            SettingsCubit(service: settingsService),
                       ),
                       /* BlocProvider(
                       create: (context) => TextOpacityCubit(),

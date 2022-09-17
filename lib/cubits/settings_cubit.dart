@@ -2,17 +2,16 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:writer/services/services.dart';
 
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit({
-    required SharedPreferences prefs,
-  })  : _settingsService = SettingsService(preferences: prefs),
+    required SettingsService service,
+  })  : _settingsService = service,
         super(
-          SettingsInitial(prefs: prefs),
+          SettingsInitial(service: service),
         );
 
   //final SharedPreferences _prefs;
