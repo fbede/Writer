@@ -3,7 +3,6 @@ import 'package:isar/isar.dart';
 
 @Collection()
 class AppUser {
-  @Id()
   @Name('UserId')
   final appUserId = Isar.autoIncrement;
 
@@ -13,7 +12,6 @@ class AppUser {
 
 @Collection()
 class AppSettings {
-  @Id()
   int? settingsId = Isar.autoIncrement;
 
   //@ThemeModeConverter()

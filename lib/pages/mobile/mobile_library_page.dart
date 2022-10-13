@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:go_router/go_router.dart';
+import 'package:writer/cubits/cubits.dart';
 import 'package:writer/functions/ui_functions.dart';
 import 'package:writer/router/router.dart';
 import 'package:writer/utils/utils.dart';
@@ -37,34 +39,36 @@ class _MobileLibraryPageState extends State<MobileLibraryPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            floatingActionButton: const _LibrarySpeedDial(),
+      child: Scaffold(
+        floatingActionButton: const _LibrarySpeedDial(),
 
-            //Used to make the title fade as the user scrolls
-            body: NotificationListener(
-              onNotification: (ScrollMetricsNotification notification) {
-                setState(() {
-                  opacity = handleScrollNotification(
-                      notification: notification, context: context);
-                });
-                return true;
-              },
-              child: CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  const SliverAppBarFactory(),
-                  SliverToBoxAdapter(
-                    child: LibraryTitleBlock(opacity: opacity),
-                  ),
-                  SliverAppBarFactory(
-                    isPinned: true,
-                    title: stringLibrary,
-                    opacity: opacity,
-                  ),
-                  const LibraryPageBody(),
-                ],
+        //Used to make the title fade as the user scrolls
+        body: NotificationListener(
+          onNotification: (ScrollMetricsNotification notification) {
+            setState(
+              () => opacity = handleScrollNotification(
+                  notification: notification, context: context),
+            );
+            return true;
+          },
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              const SliverAppBarFactory(),
+              SliverToBoxAdapter(
+                child: LibraryTitleBlock(opacity: opacity),
               ),
-            )));
+              SliverAppBarFactory(
+                isPinned: true,
+                title: stringLibrary,
+                opacity: opacity,
+              ),
+              const LibraryPageBody(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -132,16 +136,23 @@ class _CreateEditBookWidget extends StatefulWidget {
 }
 
 class _CreateEditBookWidgetState extends State<_CreateEditBookWidget> {
-  String title = '';
-  String description = '';
-  late final String sheetTitle;
+  final _title = TextEditingController();
+  final _description = TextEditingController();
+  late final String _sheetTitle;
 
   @override
   void initState() {
     super.initState();
     widget.isSeries
-        ? sheetTitle = stringCreateNewSeries
-        : sheetTitle = stringCreateNewBook;
+        ? _sheetTitle = stringCreateNewSeries
+        : _sheetTitle = stringCreateNewBook;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _title.dispose();
+    _description.dispose();
   }
 
   @override
@@ -159,36 +170,29 @@ class _CreateEditBookWidgetState extends State<_CreateEditBookWidget> {
                 bottom: 16,
               ),
               child: Text(
-                sheetTitle,
+                _sheetTitle,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             TextFormField(
+              controller: _title,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text(stringTitle),
               ),
               keyboardType: TextInputType.name,
-              onChanged: (v) => setState(() {
-                title = v;
-              }),
               textCapitalization: TextCapitalization.words,
-              // validator: (value) => validateEmail(value!),
             ),
             const SizedBox(height: 16),
             TextFormField(
+              controller: _description,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text(stringDescription),
               ),
-              keyboardType: TextInputType.text,
-
-              onChanged: (v) => setState(
-                () => description = v,
-              ),
+              keyboardType: TextInputType.multiline,
               textCapitalization: TextCapitalization.sentences,
-              //validator: (v) => checkPasswordLength(v!),
             ),
             const SizedBox(height: 16),
             _buildSignUpButton(),
@@ -203,7 +207,13 @@ class _CreateEditBookWidgetState extends State<_CreateEditBookWidget> {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size.fromHeight(50),
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.read<LibraryCubit>().createNewProject(
+              title: _title.text,
+              isSeries: widget.isSeries,
+            );
+        Navigator.pop(context);
+      },
       child: const Text(stringCreate),
     );
   }

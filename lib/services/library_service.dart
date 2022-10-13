@@ -1,5 +1,3 @@
-import 'package:flutter_lorem/flutter_lorem.dart';
-
 import 'package:writer/models/models.dart';
 
 class LibraryService {
@@ -33,23 +31,30 @@ class LibraryService {
     return series;
   }
 
-  //creates new Book
-  createNewBook() {
-    projectList.add(
-      LibraryBook(
-        projectTitle: lorem(words: 5, paragraphs: 1),
-        authorsName: lorem(words: 3, paragraphs: 1),
-      ),
-    );
-  }
-
-  //creates new Book
-  createNewSeries() {
-    projectList.add(
-      LibrarySeries(
-        projectTitle: lorem(words: 5, paragraphs: 1),
-        authorsName: lorem(words: 3, paragraphs: 1),
-      ),
-    );
+  //creates a new Book / Series
+  createNewProject({
+    required String title,
+    String author = '',
+    bool isSeries = false,
+  }) {
+    if (isSeries) {
+      projectList.add(
+        LibrarySeries(
+          projectTitle: title,
+          authorsName: author,
+          dateCreated: DateTime.now().toUtc(),
+          lastmodified: DateTime.now().toUtc(),
+        ),
+      );
+    } else {
+      projectList.add(
+        LibraryBook(
+          projectTitle: title,
+          authorsName: author,
+          dateCreated: DateTime.now().toUtc(),
+          lastmodified: DateTime.now().toUtc(),
+        ),
+      );
+    }
   }
 }

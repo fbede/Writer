@@ -13,23 +13,28 @@ class LibraryCubit extends Cubit<LibraryState> {
 
   //annouces the new state
   _annouceNewState() {
-    emit(state.copyWith(
-      projectList: _libraryService.projectList,
-      projectNum: _libraryService.projectNum,
-      bookNum: _libraryService.bookNum,
-      seriesNum: _libraryService.seriesNum,
-    ));
+    emit(
+      state.copyWith(
+        projectList: _libraryService.projectList,
+        projectNum: _libraryService.projectNum,
+        bookNum: _libraryService.bookNum,
+        seriesNum: _libraryService.seriesNum,
+      ),
+    );
   }
 
-  //creates new Book
-  createNewBook() {
-    _libraryService.createNewBook();
-    _annouceNewState();
-  }
+  //creates a new Book / Series
+  createNewProject({
+    required String title,
+    String author = '',
+    bool isSeries = false,
+  }) {
+    _libraryService.createNewProject(
+      title: title,
+      author: author,
+      isSeries: isSeries,
+    );
 
-  //creates new Book
-  createNewSeries() {
-    _libraryService.createNewSeries();
     _annouceNewState();
   }
 

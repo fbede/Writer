@@ -75,35 +75,54 @@ class _LibraryBookCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AspectRatio(
-            aspectRatio: 0.625,
-            child: Card(
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 1.5,
-                        color: Theme.of(context).colorScheme.outline),
-                    borderRadius: const BorderRadius.all(Radius.circular(4))),
-                child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    child: getCoverImage(projects[index], context)),
-              ),
-            )),
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Stack(children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(projects[index].projectTitle,
-                      textAlign: TextAlign.justify,
-                      maxLines: 2,
-                      style: Theme.of(context).textTheme.bodySmall),
+          aspectRatio: 0.625,
+          child: Card(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 1.5,
+                  color: Theme.of(context).colorScheme.outline,
                 ),
-                const SizedBox(width: 20),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(4),
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(4),
+                ),
+                child: getCoverImage(
+                  projects[index],
+                  context,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Stack(
+              children: [
+                Center(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          projects[index].projectTitle,
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                    ],
+                  ),
+                ),
+                const _LibraryPopUpMenuButton()
               ],
             ),
-            const _LibraryPopUpMenuButton()
-          ]),
+          ),
         ),
       ],
     );
