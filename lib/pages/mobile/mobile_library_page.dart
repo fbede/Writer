@@ -1,15 +1,10 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:writer/functions/ui_functions.dart';
 import 'package:writer/router/router.dart';
-
 import 'package:writer/utils/utils.dart';
-import '../../cubits/cubits.dart';
 import '../../widgets/widgets.dart';
 import '../pages.dart';
 
@@ -100,12 +95,7 @@ class _LibrarySpeedDial extends StatelessWidget {
           child: folderIcon,
           label: stringCreateNewSeries,
           onLongPress: () {},
-          onTap: () => context
-              .read<LibraryCubit>()
-              .createNewSeries(), /* context.pushNamed(homeSubPath, params: {
-            homePath: indexToHomePath(index: 0),
-            homeSubPath: indexToLibraryPath(index: 2)
-          }), */
+          onTap: () => _createNewProject(context, true),
         ),
         SpeedDialChild(
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -113,14 +103,108 @@ class _LibrarySpeedDial extends StatelessWidget {
           child: bookIcon,
           label: stringCreateNewBook,
           onLongPress: () {},
-          onTap: () => context
-              .read<LibraryCubit>()
-              .createNewBook(), /* context.pushNamed(homeSubPath, params: {
-            homePath: indexToHomePath(index: 0),
-            homeSubPath: indexToLibraryPath(index: 1)
-          }), */
+          onTap: () => _createNewProject(context, false),
         )
       ],
+    );
+  }
+
+  Future<dynamic> _createNewProject(BuildContext context, bool isSeries) {
+    return showModalBottomSheet(
+      context: context,
+      shape: bottomSheetShape,
+      isScrollControlled: true,
+      builder: (_) {
+        return _CreateEditBookWidget(isSeries: isSeries);
+      },
+    );
+  }
+}
+
+class _CreateEditBookWidget extends StatefulWidget {
+  const _CreateEditBookWidget({Key? key, this.isSeries = false})
+      : super(key: key);
+
+  final bool isSeries;
+
+  @override
+  State<_CreateEditBookWidget> createState() => _CreateEditBookWidgetState();
+}
+
+class _CreateEditBookWidgetState extends State<_CreateEditBookWidget> {
+  String title = '';
+  String description = '';
+  late final String sheetTitle;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.isSeries
+        ? sheetTitle = stringCreateNewSeries
+        : sheetTitle = stringCreateNewBook;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 16,
+              ),
+              child: Text(
+                sheetTitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                label: Text(stringTitle),
+              ),
+              keyboardType: TextInputType.name,
+              onChanged: (v) => setState(() {
+                title = v;
+              }),
+              textCapitalization: TextCapitalization.words,
+              // validator: (value) => validateEmail(value!),
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                label: Text(stringDescription),
+              ),
+              keyboardType: TextInputType.text,
+
+              onChanged: (v) => setState(
+                () => description = v,
+              ),
+              textCapitalization: TextCapitalization.sentences,
+              //validator: (v) => checkPasswordLength(v!),
+            ),
+            const SizedBox(height: 16),
+            _buildSignUpButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSignUpButton() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size.fromHeight(50),
+      ),
+      onPressed: () {},
+      child: const Text(stringCreate),
     );
   }
 }

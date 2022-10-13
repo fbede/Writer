@@ -6,8 +6,7 @@ import '../../cubits/cubits.dart';
 
 //builds the options for selecting app theme
 class SelectThemeModeWidget extends StatefulWidget {
-  const SelectThemeModeWidget({Key? key, this.context}) : super(key: key);
-  final BuildContext? context;
+  const SelectThemeModeWidget({Key? key}) : super(key: key);
 
   @override
   State<SelectThemeModeWidget> createState() => _SelectThemeModeWidgetState();

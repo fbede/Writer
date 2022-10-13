@@ -39,7 +39,10 @@ class DesktopLibraryPage extends StatelessWidget {
 class LibrarySideBar extends StatelessWidget {
   const LibrarySideBar({
     Key? key,
+    this.selectedIndex = 0,
   }) : super(key: key);
+
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -68,24 +71,34 @@ class LibrarySideBar extends StatelessWidget {
             ),
           ),
 
+          //Maybe just maybe use a Dialog for this...
+
           ListTile(
-            leading: createNewIconFolder,
-            title: const Text('Create New Series'),
-            onTap: () {},
-            onLongPress: () {},
-          ),
-          ListTile(
+            selected: selectedIndex == 1,
             leading: addCreateIcon,
             title: const Text('Create New Book'),
-            onTap: () {},
             onLongPress: () {},
+            onTap: () => context.goNamed(homeSubPath, params: {
+              homePath: indexToHomePath(index: 0),
+              homeSubPath: indexToLibraryPath(index: 1),
+            }),
+          ),
+          ListTile(
+            selected: selectedIndex == 2,
+            leading: createNewIconFolder,
+            title: const Text('Create New Series'),
+            onLongPress: () {},
+            onTap: () => context.goNamed(homeSubPath, params: {
+              homePath: indexToHomePath(index: 0),
+              homeSubPath: indexToLibraryPath(index: 2),
+            }),
           ),
           ListTile(
             leading: settingsIcon,
             title: const Text('Settings'),
             onTap: () => context.goNamed(homeSubPath, params: {
               homePath: indexToHomePath(index: 1),
-              homeSubPath: indexToSettingsPath(index: 1)
+              homeSubPath: indexToSettingsPath(index: 1),
             }),
             onLongPress: () {},
           ),

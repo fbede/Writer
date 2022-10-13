@@ -50,7 +50,7 @@ class SplashPage extends StatelessWidget {
       child: EasySplashScreen(
         logo: Image.asset('lib/assets/logo.png'),
         title: Text(
-          stringAppName,
+          '',
           style: Theme.of(context)
               .textTheme
               .displayLarge

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:writer/services/library_service.dart';
 
 import '../models/models.dart';

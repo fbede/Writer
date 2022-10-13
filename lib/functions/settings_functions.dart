@@ -37,9 +37,7 @@ handleTap(BuildContext context, int index) {
           context: context,
           isScrollControlled: true,
           shape: bottomSheetShape,
-          builder: (context) => SelectThemeModeWidget(
-                context: context,
-              ));
+          builder: (_) => const SelectThemeModeWidget());
     } else {
       context.pushNamed(aboutAppPath, params: {
         homePath: indexToHomePath(index: 1),
