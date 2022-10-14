@@ -1,13 +1,20 @@
 import 'package:writer/models/models.dart';
+import 'package:writer/repositories/repositories.dart';
 
 class LibraryService {
   static final LibraryService _instance = LibraryService._();
-  factory LibraryService() {
-    return _instance;
-  }
-  LibraryService._();
 
-  List<LibraryProject> projectList = [];
+  LibraryService._()
+      : _libraryRepo = LocalDB(),
+        projectList = LocalDB().getProjects();
+
+  factory LibraryService() => _instance;
+
+  final LibraryRepo _libraryRepo;
+
+  List<LibraryProject> projectList;
+
+  List<LibraryProject> getProjectList() => _libraryRepo.getProjects();
 
   int get projectNum => projectList.length;
 

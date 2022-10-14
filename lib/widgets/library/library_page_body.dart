@@ -40,23 +40,25 @@ class LibraryPageBody extends StatelessWidget {
       );
     } else {
       return SliverPadding(
-          padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
-          sliver: SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 150,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-                childAspectRatio: 1 / 2),
-            delegate: SliverChildBuilderDelegate(childCount: itemCount,
-                (context, index) {
-              List<LibraryProject> projects =
-                  context.watch<LibraryCubit>().state.projectList;
-              return _LibraryBookCard(
-                projects: projects,
-                index: index,
-              );
-            }),
-          ));
+        padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
+        sliver: SliverGrid(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 150,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 0,
+            childAspectRatio: 0.56,
+          ),
+          delegate: SliverChildBuilderDelegate(childCount: itemCount,
+              (context, index) {
+            List<LibraryProject> projects =
+                context.watch<LibraryCubit>().state.projectList;
+            return _LibraryBookCard(
+              projects: projects,
+              index: index,
+            );
+          }),
+        ),
+      );
     }
   }
 }
@@ -74,26 +76,29 @@ class _LibraryBookCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        AspectRatio(
-          aspectRatio: 0.625,
-          child: Card(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1.5,
-                  color: Theme.of(context).colorScheme.outline,
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+          child: AspectRatio(
+            aspectRatio: 0.625,
+            child: Card(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1.5,
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(4),
+                  ),
                 ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(4),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(4),
-                ),
-                child: getCoverImage(
-                  projects[index],
-                  context,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(4),
+                  ),
+                  child: getCoverImage(
+                    projects[index],
+                    context,
+                  ),
                 ),
               ),
             ),
@@ -101,26 +106,23 @@ class _LibraryBookCard extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Stack(
-              children: [
-                Center(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          projects[index].projectTitle,
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                    ],
+            padding: const EdgeInsetsDirectional.only(start: 12),
+            child: SizedBox(
+              height: 50,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      projects[index].projectTitle,
+                      textAlign: TextAlign.left,
+                      maxLines: 2,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
-                ),
-                const _LibraryPopUpMenuButton()
-              ],
+                  const SizedBox(width: 20),
+                  const _LibraryPopUpMenuButton()
+                ],
+              ),
             ),
           ),
         ),
@@ -148,23 +150,21 @@ class _LibraryPopUpMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PositionedDirectional(
-      end: -15,
-      child: PopupMenuButton(
-          icon: optionsMenuIcon,
-          itemBuilder: (BuildContext context) {
-            final List<PopupMenuItem> homePageMenuItems = [
-              PopupMenuItem(
-                onTap: () {},
-                child: const Text(stringEdit),
-              ),
-              PopupMenuItem(
-                onTap: () {},
-                child: const Text(stringDelete),
-              )
-            ];
-            return homePageMenuItems;
-          }),
-    );
+    return PopupMenuButton(
+        icon: optionsMenuIcon,
+        padding: const EdgeInsetsDirectional.all(0),
+        itemBuilder: (BuildContext context) {
+          final List<PopupMenuItem> homePageMenuItems = [
+            PopupMenuItem(
+              onTap: () {},
+              child: const Text(stringEdit),
+            ),
+            PopupMenuItem(
+              onTap: () {},
+              child: const Text(stringDelete),
+            )
+          ];
+          return homePageMenuItems;
+        });
   }
 }

@@ -1,1 +1,2 @@
-export 'isar_repository.dart';
+export 'isar_repo.dart';
+export 'library_repo.dart';

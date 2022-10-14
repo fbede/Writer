@@ -6,10 +6,13 @@ import 'router_paths.dart';
 final mainAppRoutes = <GoRoute>[
   GoRoute(
     path: '/',
-    redirect: (state) => state.namedLocation(homeSubPath, params: {
-      homePath: indexToHomePath(index: 0),
-      homeSubPath: indexToLibraryPath(index: 0)
-    }),
+    redirect: (state) => state.namedLocation(
+      homeSubPath,
+      params: {
+        homePath: indexToHomePath(index: 0),
+        homeSubPath: indexToLibraryPath(index: 0)
+      },
+    ),
   ),
 
   //used mainly by mobile so that nested navigation works
@@ -18,7 +21,9 @@ final mainAppRoutes = <GoRoute>[
       path: '/:$homePath',
       builder: (context, state) => HomePage(
             key: state.pageKey,
-            homeIndex: homePathToIndex(string: state.params[homePath]!),
+            homeIndex: homePathToIndex(
+              string: state.params[homePath]!,
+            ),
           ),
       routes: homeSubRoutes),
 ];
@@ -29,8 +34,12 @@ final homeSubRoutes = <GoRoute>[
     name: homeSubPath,
     builder: (context, state) => HomePage(
       key: state.pageKey,
-      homeIndex: homePathToIndex(string: state.params[homePath]!),
-      subRouteIndex: homeSubPathToIndex(string: state.params[homeSubPath]),
+      homeIndex: homePathToIndex(
+        string: state.params[homePath]!,
+      ),
+      subRouteIndex: homeSubPathToIndex(
+        string: state.params[homeSubPath],
+      ),
     ),
     routes: [
       GoRoute(
